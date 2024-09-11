@@ -1,7 +1,7 @@
 /* Estilo padrão para telas grandes */
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url('../img/fundo.avif'); 
+    background-image: url('quizz/img/fundo.avif'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
