@@ -1,61 +1,11 @@
-// Banco de dados com perguntas e respostas
 const quizData = [
-    {
-        question: "O que é?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "c"
-    },
-    {
-        question: "O que é?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "c"
-    },
-    {
-        question: "O que é ?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "a"
-    },
-    {
-        question: "O que é ?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "c"
-    },
-    {
-        question: "O que é ?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "d"
-    },
-    {
-        question: "O que é ?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "c"
-    },
-    {
-        question: "O que é ?",
-        a: "resposta",
-        b: "resposta",
-        c: "resposta",
-        d: "resposta",
-        correct: "a"
-    }
+    { question: "O que é?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
+    { question: "O que é?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
+    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "a", justification: "Aqui está a justificativa para a resposta correta." },
+    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
+    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "d", justification: "Aqui está a justificativa para a resposta correta." },
+    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
+    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "a", justification: "Aqui está a justificativa para a resposta correta." }
 ];
 
 const quiz = document.getElementById('quiz');
@@ -64,6 +14,7 @@ const resultsEl = document.getElementById('results');
 let currentQuiz = 0;
 let score = 0;
 let userAnswers = []; // Array para armazenar as respostas do usuário
+
 
 // Função para carregar as perguntas
 function loadQuiz() {
@@ -74,9 +25,10 @@ function loadQuiz() {
         <label><input type="radio" name="answer" value="a"> ${currentQuizData.a}</label><br>
         <label><input type="radio" name="answer" value="b"> ${currentQuizData.b}</label><br>
         <label><input type="radio" name="answer" value="c"> ${currentQuizData.c}</label><br>
-        <label><input type="radio" name="answer" value="d"> ${currentQuizData.d}</label>
+        <label><input type="radio" name="answer" value="d"> ${currentQuizData.d}</label><br>
     `;
 }
+
 
 // Função para obter a resposta selecionada
 function getSelected() {
@@ -93,10 +45,15 @@ function getSelected() {
 // Função para processar as respostas ao final do quiz
 function processResults() {
     quiz.innerHTML = "";
+    
+    // Calcula a nota em porcentagem
+    const percentage = Math.round((score / quizData.length) * 100);
+    
     resultsEl.innerHTML = `
-        <h2>Você respondeu corretamente ${score} de ${quizData.length} perguntas.</h2>
+        <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
+        <h3>Sua nota: ${percentage}%</h3>
         <ul id="answers-summary"></ul>
-        <button id="reiniciar"></button>
+        <button id="restart">Refazer</button>
     `;
     
     const answersSummary = document.getElementById('answers-summary');
@@ -106,8 +63,11 @@ function processResults() {
         const isCorrect = userAnswer === data.correct;
         const answerText = `
             <li>
-                <strong>Pergunta ${index + 1}:</strong> ${data.question}<br>
-                <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[userAnswer]}</span>
+                <div class="answer-card">
+                    <strong>Pergunta ${index + 1}:</strong> ${data.question}<br>
+                    <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[userAnswer]}</span><br>
+                    <button class="justification-button" onclick="showJustification(${index})">Ver Justificativa</button>
+                </div>
             </li>
         `;
         answersSummary.innerHTML += answerText;
@@ -116,6 +76,12 @@ function processResults() {
     // Adiciona evento ao botão de recomeçar
     const restartBtn = document.getElementById('restart');
     restartBtn.addEventListener('click', restartQuiz);
+}
+
+// Função para mostrar a justificativa
+function showJustification(index) {
+    const justification = quizData[index].justification;
+    alert(justification); // Aqui você pode substituir o alert por um modal ou uma caixa de texto mais estilizada
 }
 
 // Função para reiniciar o quiz
@@ -146,40 +112,6 @@ submitBtn.addEventListener('click', () => {
         }
     }
 });
-// Função para processar as respostas ao final do quiz
-function processResults() {
-    quiz.innerHTML = "";
-    
-    // Calcula a nota em porcentagem
-    const percentage = Math.round((score / quizData.length) * 100);
-    
-    resultsEl.innerHTML = `
-        <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
-        <h3>Sua nota: ${percentage}%</h3>
-        <ul id="answers-summary"></ul>
-        <button id="restart">Refazer</button>
-    `;
-    
-    const answersSummary = document.getElementById('answers-summary');
-
-    quizData.forEach((data, index) => {
-        const userAnswer = userAnswers[index];
-        const isCorrect = userAnswer === data.correct;
-        const answerText = `
-            <li>
-                <strong>Pergunta ${index + 1}:</strong> ${data.question}<br>
-                <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[userAnswer]}</span>
-            </li>
-        `;
-        answersSummary.innerHTML += answerText;
-    });
-
-    // Adiciona evento ao botão de recomeçar
-    const restartBtn = document.getElementById('restart');
-    restartBtn.addEventListener('click', restartQuiz);
-}
 
 // Carregar o primeiro quiz
 loadQuiz();
-
-

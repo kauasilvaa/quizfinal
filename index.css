@@ -1,41 +1,176 @@
+/* Corpo com fundo moderno */
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url('quizz/img/fundo.avif'); /* Caminhoo da sua imagem de fundo */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Para fazer o background rolar suavemente */
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: hidden;
     height: 100vh;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Fundo do corpo com gradiente e partículas */
+.background {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, #6e8fbd, #a1c4fd);
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+/* Partículas animadas */
+.background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 20%, transparent 80%);
+    opacity: 0.4;
+    pointer-events: none;
+    animation: particles 15s infinite;
+}
+
+@keyframes particles {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Caixa do quiz */
 .quiz-container {
-    background: linear-gradient(145deg, rgba(71, 1, 247, 0.85), rgba(0, 0, 0, 0.3));
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.5);
-    width: 350px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 40px;
+    width: 400px;
     text-align: center;
-    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
-    transition: transform 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid #dcdcdc;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .quiz-container:hover {
-    transform: scale(1.05); /* Pequeno zoom quando o usuário passa o mouse */
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* Título e subtítulo */
 h1 {
-    font-size: 2em;
+    font-size: 2.8em;
     margin-bottom: 20px;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    color: #3f51b5;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    color: #3949ab;
+}
+
+/* Estilo do Botão de Filtro */
+.filter-container {
+    position: relative;
+}
+
+.filter-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 20px;
+    background: #3f51b5;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.filter-button:hover {
+    background: #303f9f;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.filter-icon {
+    font-size: 1.3em;
+}
+
+.filter-menu {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.filter-menu .filter-item {
+    display: block;
+    padding: 12px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.filter-menu .filter-item:last-child {
+    border-bottom: none;
+}
+
+.filter-menu .filter-item:hover {
+    background-color: #f0f0f0;
+}
+
+.filter-container:hover .filter-menu {
+    display: block;
+}
+
+/* Botões de nível */
+.btn-level {
+    display: block;
+    padding: 15px;
+    margin: 10px 0;
+    background: #607d8b;
+    color: #ffffff;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #455a64;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-level:hover {
+    background: #455a64;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .quiz-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+
+
+
 
 .question {
     font-size: 1.5em;
@@ -107,7 +242,7 @@ button:hover {
     box-shadow: 0px 7px 20px rgba(3, 169, 244, 0.6);
     transform: translateY(-5px); /* Efeito flutuante */
 }
-.to{
+.top{
     font-size: 20px;
     color: white;
 }
