@@ -36,13 +36,8 @@
                 <a class="btn btn-level" href="quizz/html/perguntas.html">Médio</a>
                 <a class="btn btn-level" href="quizz/html/perguntas.html">Difícil</a>
                 
-                <!-- Botão de Justificativa -->
-                <button id="justification" class="btn btn-justification">Adicionar Justificativa</button>
 
-                <!-- Resultados e Restart -->
-                <div id="results">Resultado: <span id="score">0</span></div>
-                <button id="restart" class="btn btn-restart">Reiniciar</button>
-            </div>
+              
         </div>
     </div>
 
