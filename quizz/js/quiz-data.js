@@ -84,15 +84,25 @@ function showJustification(index) {
     alert(justification); // Aqui você pode substituir o alert por um modal ou uma caixa de texto mais estilizada
 }
 
-// Função para reiniciar o quiz
-function restartQuiz() {
-    currentQuiz = 0;
-    score = 0;
-    userAnswers = []; // Limpa as respostas do usuário
-    resultsEl.innerHTML = "";
-    submitBtn.style.display = 'block'; // Mostra o botão de enviar novamente
-    loadQuiz();
+// Função para mostrar a justificativa
+function showJustification(index) {
+    const justification = quizData[index].justification;
+    const justificationEl = document.createElement('div');
+    justificationEl.classList.add('justification-box');
+    justificationEl.innerText = justification;
+    
+    const answerCard = document.querySelectorAll('.answer-card')[index];
+    if (!answerCard.querySelector('.justification-box')) {
+        answerCard.appendChild(justificationEl);
+    }
 }
+
+// Função para mostrar/ocultar a justificativa
+function showJustification(index) {
+    const answerCard = document.querySelectorAll('.answer-card')[index];
+    answerCard.classList.toggle('show-justification');
+}
+
 
 submitBtn.addEventListener('click', () => {
     const selectedAnswer = getSelected();
