@@ -96,7 +96,6 @@ button:hover {
     max-width: 350px; /* Reduzir o tamanho do container */
     margin-left: auto;
     margin-right: auto;
-    padding: 10px; /* Reduzir o padding */
     background: rgba(0, 0, 0, 0.7); /* Fundo escuro mais destacado */
     border-radius: 10px; /* Borda arredondada para suavizar o layout */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Reduzir a sombra */

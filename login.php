@@ -69,14 +69,11 @@
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input-field" name="sobrenome" placeholder="SobreNome">
-                        <i class="bx bx-user"></i>
-                    </div>
-                </div>
-                <div class="input-box">
                     <input type="text" class="input-field" name="nomedeusuario" placeholder="Nome De Usuário">
                     <i class="bx bx-envelope"></i>
                 </div>
+                </div>
+             
                 <div class="input-box">
                     <input type="email" class="input-field" name="email" placeholder="Email">
                     <i class="bx bx-envelope"></i>
