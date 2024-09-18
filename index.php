@@ -16,6 +16,8 @@
         <div class="nav-menu" id="navMenu">
             <ul>
                 <li><a href="../quizfinal/index.php" class="link active">Home</a></li>
+                <li><a href="termos.php" class="link active">Termos & Condições</a></li>
+                <li><a href="sobre.php" class="link active">Sobre Nós</a></li>
             </ul>
         </div>
         <div class="nav-button">
@@ -51,9 +53,7 @@
                     </div>
                 </div>
 
-                <a class="btn btn-level" href="quizz/html/perguntas.html">Fácil</a>
-                <a class="btn btn-level" href="quizz/html/perguntas.html">Médio</a>
-                <a class="btn btn-level" href="quizz/html/perguntas.html">Difícil</a>
+                <a class="btn btn-level" href="quizz/html/perguntas.html">Realizar Simulado</a>
             </div>
         </div>
     </div>

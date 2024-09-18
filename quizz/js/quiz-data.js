@@ -44,7 +44,7 @@ const quizData = [
         question: "Qual é o animal terrestre mais rápido do mundo?",
         a: "Leopardo",
         b: "Tigre",
-        c: "Chita",
+        c: "Guepardo",
         d: "Leão",
         correct: "c"
     },
