@@ -134,11 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
 
                 <!-- Campo para selecionar o nível de acesso -->
                 <div class="input-box">
-                    <select name="nivel_acesso" class="input-field">
-                        <option value="1">Administrador</option>
-                        <option value="2">Usuário Comum</option>
+        
                     </select>
-                    <i class="bx bx-user-circle"></i>
+        
                 </div>
 
                 <div class="input-box">
