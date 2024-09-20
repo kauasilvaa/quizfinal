@@ -18,7 +18,7 @@ if (
         $_POST['nomedeusuario'], 
         $_POST['email'], 
         $_POST['senha'], 
-        $_POST['nivel_acesso'] // Passando o nível de acesso para o controlador
+        $_POST['nivel_acesso'], // Passando o nível de acesso para o controlador
     );
 
     $_SESSION['message'] = 'Cadastro realizado com sucesso!';
