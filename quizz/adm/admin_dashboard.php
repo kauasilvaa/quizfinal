@@ -76,6 +76,10 @@ $users = $usersController->listUsers();
                                 <td><?php echo $user['nomedeusuario']; ?></td>
                                 <td><?php echo $user['email']; ?></td>
                                 <td><?php echo $user['nivel_acesso'] == 1 ? 'Administrador' : 'Usuário Comum'; ?></td>
+                                <td>
+                                    <a href="edit_user.php?id=<?php echo $user['id']; ?>" class="btn">Editar</a>
+                                    <a href="delete_user.php?id=<?php echo $user['id']; ?>" class="btn">Deletar</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
