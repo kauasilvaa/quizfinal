@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Set-2024 às 13:23
+-- Tempo de geração: 20-Set-2024 às 19:28
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -32,18 +32,18 @@ CREATE TABLE `usuarios` (
   `nome` varchar(255) NOT NULL,
   `nomedeusuario` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `senha` varchar(255) NOT NULL
+  `senha` varchar(255) NOT NULL,
+  `nivel_acesso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nome`, `nomedeusuario`, `email`, `senha`) VALUES
-(1, 'caio', 'cdd', 'jfuyf@fuf', 'khjlçkh'),
-(2, 'Kauã', 'kaua', 'kaua60033@gmail.com', 'kaua123'),
-(3, '', '', '', ''),
-(4, '', '', '', '');
+INSERT INTO `usuarios` (`id_usuario`, `nome`, `nomedeusuario`, `email`, `senha`, `nivel_acesso`) VALUES
+(1, 'caio', 'cdd', 'jfuyf@fuf', 'khjlçkh', 0),
+(2, 'Kauã', 'kaua', 'kaua60033@gmail.com', 'kaua123', 1),
+(5, 'dudao', 'dudao', 'mateusoliiveira000@gmail.com', 'duda123', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -63,7 +63,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
