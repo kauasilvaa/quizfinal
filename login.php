@@ -1,3 +1,36 @@
+<?php
+session_start();
+require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
+require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/MVC/Controller/UserController';
+
+$usersController = new UserController($pdo);
+if (
+    isset($_POST['nome']) &&
+    isset($_POST['nomedeusuario']) &&
+    isset($_POST['email']) &&
+    isset($_POST['senha'])
+) {
+    $usersController->createUser($_POST['nome'], $_POST['nomedeusuario'], $_POST['email'], $_POST['senha']);
+
+    $_SESSION['message'] = 'Cadastro realizado com sucesso!';
+    header('Location: login.php');
+    exit();
+}
+
+if (isset($_POST['Entrar'])) {
+
+    $resultado = $usersController->fazerlogin($_POST['nomedeusuario'], $_POST['senha']);
+
+
+    if ($resultado == true){
+        header('Location: index.php');
+    }else {
+        header('Location: login.php');
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,30 +68,32 @@
         <div class="form-box">
 
             <!------------------- login form -------------------------->
-
             <div class="login-container" id="login">
-                <div class="top">
-                    <span>Não tem uma conta? <a href="#" onclick="register()">Faça Aqui</a></span>
-                    <header>Login</header>
-                </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" placeholder="NomeDeUsuario">
-                    <i class="bx bx-user"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" class="input-field" placeholder="Senha">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <input type="submit" class="submit" value="Entrar">
-                </div>
-                <div class="two-col">
+                <form method="post">
+                    <div class="top">
+                        <span>Não tem uma conta? <a href="#" onclick="register()">Faça Aqui</a></span>
+                        <header>Login</header>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="nomedeusuario" class="input-field" placeholder="NomeDeUsuario">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="senha" class="input-field" placeholder="Senha">
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <input type="hidden" name="Entrar">
+                    <div class="input-box">
+                        <input type="submit" class="submit" value="Entrar">
+                    </div>
+                    <div class="two-col">
 
-                </div>
+                    </div>
+                </form>
             </div>
 
             <!------------------- registration form -------------------------->
-            <div class="register-container" id="register">
+            <form method="post" class="register-container" id="register">
                 <div class="top">
                     <span>Tem uma Conta? <a href="#" onclick="login()">Login</a></span>
                     <header>Cadastrar</header>
@@ -69,14 +104,11 @@
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input-field" name="sobrenome" placeholder="SobreNome">
-                        <i class="bx bx-user"></i>
+                        <input type="text" class="input-field" name="nomedeusuario" placeholder="Nome De Usuário">
+                        <i class="bx bx-envelope"></i>
                     </div>
                 </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" name="nomedeusuario" placeholder="Nome De Usuário">
-                    <i class="bx bx-envelope"></i>
-                </div>
+
                 <div class="input-box">
                     <input type="email" class="input-field" name="email" placeholder="Email">
                     <i class="bx bx-envelope"></i>
@@ -88,13 +120,12 @@
                 <div class="input-box">
                     <input type="submit" class="submit" value="Registrar">
                 </div>
-                <div class="two-col">
-                    <div class="two">
-                        <label><a href="#">Termos & Condições</a></label>
-                    </div>
-                </div>
+            </form>
+            <div class="two-col">
             </div>
+
         </div>
+    </div>
     </div>
 
 

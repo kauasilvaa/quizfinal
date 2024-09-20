@@ -8,6 +8,27 @@
     <title>Bem-Vindo ao Quiz</title>
 </head>
 <body>
+<div class="wrapper">
+    <nav class="nav">
+        <div class="nav-logo">
+            <img src="quizz/img/logo.jfif" class="logo">
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <ul>
+                <li><a href="../quizfinal/index.php" class="link active">Home</a></li>
+                <li><a href="termos.php" class="link active">Termos & Condições</a></li>
+                <li><a href="sobre.php" class="link active">Sobre Nós</a></li>
+            </ul>
+        </div>
+        <div class="nav-button">
+        <button class="btn white-btn" id="loginBtn" onclick="window.location.href='login.php'">Login</button>
+            <button class="btn" id="registerBtn" onclick="register()">login</button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+        </div>
+    </nav>
+
     <div class="background">
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <div class="quiz-container">
@@ -32,20 +53,11 @@
                     </div>
                 </div>
 
-                <a class="btn btn-level" href="quizz/html/perguntas.html">Fácil</a>
-                <a class="btn btn-level" href="quizz/html/perguntas.html">Médio</a>
-                <a class="btn btn-level" href="quizz/html/perguntas.html">Difícil</a>
-                
-                <!-- Botão de Justificativa -->
-                <button id="justification" class="btn btn-justification">Adicionar Justificativa</button>
-
-                <!-- Resultados e Restart -->
-                <div id="results">Resultado: <span id="score">0</span></div>
-                <button id="restart" class="btn btn-restart">Reiniciar</button>
+                <a class="btn btn-level" href="quizz/html/perguntas.html">Realizar Simulado</a>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

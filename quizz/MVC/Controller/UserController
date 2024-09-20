@@ -1,0 +1,41 @@
+<?php
+require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/MVC/Model/UserModel';
+
+class UserController
+{
+    private $usermodel;
+
+    public function __construct($pdo)
+    {
+        $this->usermodel = new UserModel($pdo);
+    }
+
+    public function createUser($nome, $nomedeusuario, $email, $senha)
+    {
+        $this->usermodel->createUser($nome, $nomedeusuario, $email, $senha);
+    }
+
+    public function listUsers()
+    {
+        return $this->usermodel->listUsers();
+    }
+
+    public function showUsersList()
+    {   
+        $users = $this->listUsers();
+        include 'quizfinal/quizz/MVC/Views/UserViews'; // Inclua a view
+    }
+
+    public function updateUser($id_usuario, $nome, $nomedeusuario, $email, $senha,)
+    {
+        $this->usermodel->updateUser($id_usuario, $nome, $nomedeusuario, $email, $senha,);
+    }
+
+    public function deleteUser($id_usuario)
+    {
+        $this->usermodel->deleteUser($id_usuario);
+    }
+    public function fazerlogin ($nomedeusuario, $senha){
+        return $this->usermodel-> fazerlogin ($nomedeusuario, $senha);
+    }
+}

@@ -1,0 +1,24 @@
+<?php
+include_once 'quizfinal/quizz/MVC/Controller/UserController';
+include_once 'quizfinal/quizz/db/quiz.sql';
+
+    echo "<h2>Usuarios cadastrados</h2>";
+    echo "<table>";
+    echo "<tr><th>Nome</th><th>Email</th><th>Tipo de usuário</th><th>Ano escolar</th><th>Matéria</th></tr>";
+
+    try {
+        foreach ($users as $user){
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($user['nome']) . "</td>";
+            echo "<td>" . htmlspecialchars($user['nomedeusuario']) . "</td>";
+            echo "<td>" . htmlspecialchars($user['email']) . "</td>";
+            echo "<td>" . htmlspecialchars($user['senha']) . "</td>";
+            echo "</tr>";
+        }
+    } catch (PDOException $e) {
+        echo "<p>Erro ao exibir usuários: " . $e->getMessage() . "</p>";
+    }
+
+    echo "</table>";
+    ?>
+</body>

@@ -1,11 +1,61 @@
+// Banco de dados com perguntas e respostas atualizadas
 const quizData = [
-    { question: "O que é?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
-    { question: "O que é?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
-    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "a", justification: "Aqui está a justificativa para a resposta correta." },
-    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
-    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "d", justification: "Aqui está a justificativa para a resposta correta." },
-    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "c", justification: "Aqui está a justificativa para a resposta correta." },
-    { question: "O que é ?", a: "resposta", b: "resposta", c: "resposta", d: "resposta", correct: "a", justification: "Aqui está a justificativa para a resposta correta." }
+    {
+        question: "(ITA) Assinale a opção relativa aos números de oxidação CORRETOS do átomo de cloro nos compostos KCIO3, Ca(CIO)2, Mg(CO3)2 e Ba(CIO4)2, respectivamente? (DIFÍCIL)",
+        a: "-1,-1,-1e-1",
+        b: "+3, +2, +4 e +6",
+        c: " +3, +1, +5 +7",
+        d: " +3, +1, +5 c +0",
+        correct: "c"
+    },
+    {
+        question: "(FUNREI) Com relação à reação Zn + HgSO→ ZnSO4 + Hg, qual é a afirmativa INCORRETA? (MÉDIO)",
+        a: " A reação é do tipo oxirredução",
+        b: "O mercúrio se oxidou pela ação do zinco",
+        c: "O número de oxidação do enxofre não variou",
+        d: " O zinco foi o agente redutor",
+        correct: "b"
+    },
+    {
+        question: "Qual é o maior oceano do mundo?",
+        a: "Oceano Atlântico",
+        b: "Oceano Índico",
+        c: "Oceano Ártico",
+        d: "Oceano Pacífico",
+        correct: "d"
+    },
+    {
+        question: "Em que ano o homem pisou na Lua pela primeira vez?",
+        a: "1959",
+        b: "1969",
+        c: "1979",
+        d: "1989",
+        correct: "b"
+    },
+    {
+        question: "Qual país é conhecido como a Terra do Sol Nascente?",
+        a: "China",
+        b: "Coreia do Sul",
+        c: "Japão",
+        d: "Tailândia",
+        correct: "c"
+    },
+    {
+        question: "Qual é o animal terrestre mais rápido do mundo?",
+        a: "Leopardo",
+        b: "Tigre",
+        c: "Guepardo",
+        d: "Leão",
+        correct: "c"
+    },
+    {
+        question: "Qual é o elemento químico representado pela letra 'O'?",
+        a: "Ouro",
+        b: "Oxigênio",
+        c: "Ósmio",
+        d: "Óxido",
+        correct: "b"
+    }
 ];
 
 const quiz = document.getElementById('quiz');
@@ -14,7 +64,6 @@ const resultsEl = document.getElementById('results');
 let currentQuiz = 0;
 let score = 0;
 let userAnswers = []; // Array para armazenar as respostas do usuário
-
 
 // Função para carregar as perguntas
 function loadQuiz() {
@@ -25,20 +74,21 @@ function loadQuiz() {
         <label><input type="radio" name="answer" value="a"> ${currentQuizData.a}</label><br>
         <label><input type="radio" name="answer" value="b"> ${currentQuizData.b}</label><br>
         <label><input type="radio" name="answer" value="c"> ${currentQuizData.c}</label><br>
-        <label><input type="radio" name="answer" value="d"> ${currentQuizData.d}</label><br>
+        <label><input type="radio" name="answer" value="d"> ${currentQuizData.d}</label>
     `;
 }
-
 
 // Função para obter a resposta selecionada
 function getSelected() {
     const answers = document.getElementsByName('answer');
-    let selectedAnswer;
+    let selectedAnswer = null;
+    
     answers.forEach(answer => {
         if (answer.checked) {
             selectedAnswer = answer.value;
         }
     });
+    
     return selectedAnswer;
 }
 
@@ -53,7 +103,7 @@ function processResults() {
         <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
         <h3>Sua nota: ${percentage}%</h3>
         <ul id="answers-summary"></ul>
-        <button id="restart">Refazer</button>
+        <button id="restart">Recomeçar</button>
     `;
     
     const answersSummary = document.getElementById('answers-summary');
@@ -63,11 +113,8 @@ function processResults() {
         const isCorrect = userAnswer === data.correct;
         const answerText = `
             <li>
-                <div class="answer-card">
-                    <strong>Pergunta ${index + 1}:</strong> ${data.question}<br>
-                    <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[userAnswer]}</span><br>
-                    <button class="justification-button" onclick="showJustification(${index})">Ver Justificativa</button>
-                </div>
+                <strong>Pergunta ${index + 1}:</strong> ${data.question}<br>
+                <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[userAnswer]}</span>
             </li>
         `;
         answersSummary.innerHTML += answerText;
@@ -76,12 +123,6 @@ function processResults() {
     // Adiciona evento ao botão de recomeçar
     const restartBtn = document.getElementById('restart');
     restartBtn.addEventListener('click', restartQuiz);
-}
-
-// Função para mostrar a justificativa
-function showJustification(index) {
-    const justification = quizData[index].justification;
-    alert(justification); // Aqui você pode substituir o alert por um modal ou uma caixa de texto mais estilizada
 }
 
 // Função para reiniciar o quiz
@@ -110,6 +151,8 @@ submitBtn.addEventListener('click', () => {
             processResults();
             submitBtn.style.display = 'none'; // Esconde o botão de enviar quando o quiz termina
         }
+    } else {
+        alert("Por favor, selecione uma resposta antes de continuar!");
     }
 });
 

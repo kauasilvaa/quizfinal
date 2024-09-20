@@ -1,0 +1,63 @@
+<?php
+class UserModel
+{
+    private $pdo;
+
+    public function __construct($pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function createUser($nome, $nomedeusuario, $email, $senha)
+    {
+        $sql = "INSERT INTO usuarios (nome, nomedeusuario, email, senha) VALUES (?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$nome, $nomedeusuario, $email, $senha]);
+        return $stmt->rowCount();
+    }
+
+    public function listUsers()
+    {
+        $sql = "SELECT * FROM usuarios";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateUser($id_usuario, $nome, $nomedeusuario, $email, $senha)
+    {
+        $sql = "UPDATE users SET nome = ?, nomedeusuario = ?, email = ?, senha = ? WHERE id_usuario = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$nome, $nomedeusuario, $email, $senha]);
+    }
+
+    public function deleteUser($id_usuario)
+    {
+        $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id_usuario]);
+    }
+
+    public function fazerlogin($nomedeusuario, $senha)
+    {
+        $sql = "SELECT * FROM usuarios WHERE nomedeusuario = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$nomedeusuario]);
+
+        // Verificar se o usuário foi encontrado
+        if ($stmt->rowCount() > 0) {
+            $usuario = $stmt->fetch();
+
+            // Verifica a senha usando password_verify
+            if ($usuario['senha'] == $senha) {
+                // Login bem-sucedido
+                return true;
+            } else {
+                // Senha incorreta
+                return false;
+            }
+        } else {
+            // Usuário não encontrado
+            return false;
+        }
+    }
+}
