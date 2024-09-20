@@ -32,7 +32,7 @@
     <div class="background">
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <div class="quiz-container">
-                <h1>Quiz</h1>
+                <h1>SimulaQuest</h1>
                 <h2 class="top">Escolha seu nível</h2>
 
                 <!-- Botão Filtro -->
