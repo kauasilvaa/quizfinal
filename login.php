@@ -10,15 +10,13 @@ if (
     isset($_POST['nome']) &&
     isset($_POST['nomedeusuario']) &&
     isset($_POST['email']) &&
-    isset($_POST['senha']) &&
-    isset($_POST['nivel_acesso']) // Adicionando nível de acesso
+    isset($_POST['senha'])
 ) {
     $usersController->createUser(
         $_POST['nome'], 
         $_POST['nomedeusuario'], 
         $_POST['email'], 
-        $_POST['senha'], 
-        $_POST['nivel_acesso'], // Passando o nível de acesso para o controlador
+        $_POST['senha']
     );
 
     $_SESSION['message'] = 'Cadastro realizado com sucesso!';
