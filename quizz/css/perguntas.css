@@ -23,6 +23,7 @@ body {
     text-align: center;
     backdrop-filter: blur(12px);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    margin-top: 1000px;
 }
 
 .quiz-container:hover {
