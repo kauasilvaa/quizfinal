@@ -47,7 +47,7 @@ class UserModel
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch();
 
-            // Verifica a senha usando password_verify
+            // Verifica a senha usando password_verifyy
             if ($usuario['senha'] == $senha) {
                 // Login bem-sucedido
                 return true;
