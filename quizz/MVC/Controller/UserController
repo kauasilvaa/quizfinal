@@ -12,9 +12,9 @@ class UserController
         $this->usermodel = new UserModel($pdo);
     }
 
-    public function createUser($nome, $nomedeusuario, $email, $senha)
+    public function createUser($nome, $nomedeusuario, $email, $senha, $nivel_acesso)
     {
-        $this->usermodel->createUser($nome, $nomedeusuario, $email, $senha);
+        $this->usermodel->createUser($nome, $nomedeusuario, $email, $senha, $nivel_acesso);
     }
 
     public function listUsers()
