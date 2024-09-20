@@ -10,15 +10,14 @@ if (
     isset($_POST['nome']) &&
     isset($_POST['nomedeusuario']) &&
     isset($_POST['email']) &&
-    isset($_POST['senha']) &&
-    isset($_POST['nivel_acesso']) // Adicionando nível de acesso
+    isset($_POST['senha']) 
 ) {
     $usersController->createUser(
         $_POST['nome'], 
         $_POST['nomedeusuario'], 
         $_POST['email'], 
         $_POST['senha'], 
-        $_POST['nivel_acesso'] // Passando o nível de acesso para o controlador
+       0
     );
 
     $_SESSION['message'] = 'Cadastro realizado com sucesso!';
@@ -134,11 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
 
                 <!-- Campo para selecionar o nível de acesso -->
                 <div class="input-box">
-                    <select name="nivel_acesso" class="input-field">
-                        <option value="1">Administrador</option>
-                        <option value="2">Usuário Comum</option>
                     </select>
-                    <i class="bx bx-user-circle"></i>
+                 
                 </div>
 
                 <div class="input-box">

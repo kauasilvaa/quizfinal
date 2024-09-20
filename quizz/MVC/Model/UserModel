@@ -8,11 +8,11 @@ class UserModel
         $this->pdo = $pdo;
     }
 
-    public function createUser($nome, $nomedeusuario, $email, $senha)
+    public function createUser($nome, $nomedeusuario, $email, $senha, $nivel_acesso)
     {
-        $sql = "INSERT INTO usuarios (nome, nomedeusuario, email, senha) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO usuarios (nome, nomedeusuario, email, senha, nivel_acesso) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nome, $nomedeusuario, $email, $senha]);
+        $stmt->execute([$nome, $nomedeusuario, $email, $senha, $nivel_acesso]);
         return $stmt->rowCount();
     }
 
