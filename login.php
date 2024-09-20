@@ -4,32 +4,51 @@ require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
 require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/MVC/Controller/UserController';
 
 $usersController = new UserController($pdo);
+
+// Processo de cadastro
 if (
     isset($_POST['nome']) &&
     isset($_POST['nomedeusuario']) &&
     isset($_POST['email']) &&
-    isset($_POST['senha'])
+    isset($_POST['senha']) &&
+    isset($_POST['nivel_acesso']) // Adicionando nível de acesso
 ) {
-    $usersController->createUser($_POST['nome'], $_POST['nomedeusuario'], $_POST['email'], $_POST['senha']);
+    $usersController->createUser(
+        $_POST['nome'], 
+        $_POST['nomedeusuario'], 
+        $_POST['email'], 
+        $_POST['senha'], 
+        $_POST['nivel_acesso'] // Passando o nível de acesso para o controlador
+    );
 
     $_SESSION['message'] = 'Cadastro realizado com sucesso!';
     header('Location: login.php');
     exit();
 }
-
-if (isset($_POST['Entrar'])) {
-
+// Processo de login
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
     $resultado = $usersController->fazerlogin($_POST['nomedeusuario'], $_POST['senha']);
-
-
-    if ($resultado == true){
-        header('Location: index.php');
-    }else {
+    
+    if ($resultado) {
+        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessão
+        $_SESSION['nome'] = $resultado['nome']; // Salva o nome do usuário
+        $_SESSION['nivel_acesso'] = $resultado['nivel_acesso']; // Salva o nível de acesso na sessão
+        
+        // Redireciona com base no nível de acesso
+        if ($_SESSION['nivel_acesso'] == 1) {
+            header('Location: quizz/adm/admin_dashboard.php'); // Página de administrador
+        } else {
+            header('Location: index.php'); // Página de usuário comum
+        }
+        exit(); // Finaliza a execução
+    } else {
+        $_SESSION['message'] = 'Login falhou. Usuário ou senha inválidos.';
         header('Location: login.php');
+        exit(); // Finaliza a execução
     }
 }
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +59,7 @@ if (isset($_POST['Entrar'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="quizz/css/login.css">
-    <title>Ludiflex | Login & Registrationn</title>
+    <title>Ludiflex | Login & Registration</title>
 </head>
 
 <body>
@@ -48,7 +67,6 @@ if (isset($_POST['Entrar'])) {
         <nav class="nav">
             <div class="nav-logo">
                 <img src="quizz/img/logo.jfif" class="logo">
-
             </div>
             <div class="nav-menu" id="navMenu">
                 <ul>
@@ -67,7 +85,7 @@ if (isset($_POST['Entrar'])) {
         <!----------------------------- Form box ----------------------------------->
         <div class="form-box">
 
-            <!------------------- login form -------------------------->
+            <!------------------- login form --------------------------->
             <div class="login-container" id="login">
                 <form method="post">
                     <div class="top">
@@ -75,24 +93,21 @@ if (isset($_POST['Entrar'])) {
                         <header>Login</header>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="nomedeusuario" class="input-field" placeholder="NomeDeUsuario">
+                        <input type="text" name="nomedeusuario" class="input-field" placeholder="NomeDeUsuario" required>
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="password" name="senha" class="input-field" placeholder="Senha">
+                        <input type="password" name="senha" class="input-field" placeholder="Senha" required>
                         <i class="bx bx-lock-alt"></i>
                     </div>
-                    <input type="hidden" name="Entrar">
+                    <input type="hidden" name="Entrar" value="1">
                     <div class="input-box">
-                        <input type="submit" class="submit" value="Entrar">
-                    </div>
-                    <div class="two-col">
-
+                        <input type="submit" name="Entrar" class="submit" value="Entrar">
                     </div>
                 </form>
             </div>
 
-            <!------------------- registration form -------------------------->
+            <!------------------- registration form --------------------------->
             <form method="post" class="register-container" id="register">
                 <div class="top">
                     <span>Tem uma Conta? <a href="#" onclick="login()">Login</a></span>
@@ -100,34 +115,40 @@ if (isset($_POST['Entrar'])) {
                 </div>
                 <div class="two-forms">
                     <div class="input-box">
-                        <input type="text" class="input-field" name="nome" placeholder="Nome">
+                        <input type="text" class="input-field" name="nome" placeholder="Nome" required>
                         <i class="bx bx-user"></i>
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input-field" name="nomedeusuario" placeholder="Nome De Usuário">
+                        <input type="text" class="input-field" name="nomedeusuario" placeholder="Nome De Usuário" required>
                         <i class="bx bx-envelope"></i>
                     </div>
                 </div>
-
                 <div class="input-box">
-                    <input type="email" class="input-field" name="email" placeholder="Email">
+                    <input type="email" class="input-field" name="email" placeholder="Email" required>
                     <i class="bx bx-envelope"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" class="input-field" name="senha" placeholder="Senha">
+                    <input type="password" class="input-field" name="senha" placeholder="Senha" required>
                     <i class="bx bx-lock-alt"></i>
                 </div>
+
+                <!-- Campo para selecionar o nível de acesso -->
+                <div class="input-box">
+                    <select name="nivel_acesso" class="input-field">
+                        <option value="1">Administrador</option>
+                        <option value="2">Usuário Comum</option>
+                    </select>
+                    <i class="bx bx-user-circle"></i>
+                </div>
+
                 <div class="input-box">
                     <input type="submit" class="submit" value="Registrar">
                 </div>
             </form>
-            <div class="two-col">
-            </div>
+            <div class="two-col"></div>
 
         </div>
     </div>
-    </div>
-
 
     <script>
         function myMenuFunction() {
