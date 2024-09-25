@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
     $resultado = $usersController->fazerlogin($_POST['nomedeusuario'], $_POST['senha']);
     
     if ($resultado) {
-        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessão
+        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessãoo
         $_SESSION['nome'] = $resultado['nome']; // Salva o nome do usuário
         $_SESSION['nivel_acesso'] = $resultado['nivel_acesso']; // Salva o nível de acesso na sessão
         
