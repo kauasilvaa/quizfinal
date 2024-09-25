@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\quizfinal\quizz\db\config.php';
-require_once 'C:\xampp\htdocs\quizfinal\quizz\MVC\Controller\UserController';
+require_once 'C:\xampp\htdocs\quizfinal\quizfinal\quizz\db\config.php';
+require_once 'C:\xampp\htdocs\quizfinal\quizfinal\quizz\MVC\Controller\UserController';
 
 $usersController = new UserController($pdo);
 

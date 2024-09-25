@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\quizfinal\quizz\MVC\Model\UserModel';
+require_once 'C:\xampp\htdocs\quizfinal\quizfinal\quizz\MVC\Model\UserModel';
 
 class UserController
 {

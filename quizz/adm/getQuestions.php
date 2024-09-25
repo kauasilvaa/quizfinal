@@ -5,7 +5,7 @@ require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
 $stmt = $pdo->prepare("SELECT * FROM perguntas");
 if ($stmt->execute()) {
     $perguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // Retorna as perguntas em formato JSON
+    // Verifica se há perguntas e retorna em JSON
     header('Content-Type: application/json');
     echo json_encode($perguntas);
 } else {

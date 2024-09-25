@@ -20,32 +20,29 @@
         let quizData = [];
         let currentQuiz = 0;
         let userAnswers = [];
+        let score = 0;
 
         // Função para carregar as perguntas do servidor
-        fetch('http://localhost/quizfinal/quizfinal/quizz/adm/getQuestions.php') // Use o caminho correto
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data); // Verifique os dados no console
-                quizData = data;
-                loadQuiz();
-            })
-            .catch(error => {
-                console.error('Erro ao carregar as perguntas:', error);
-                document.getElementById('quiz').innerHTML = "<p>Erro ao carregar perguntas. Tente novamente mais tarde.</p>";
-            });
+        function loadQuizData() {
+            fetch('http://localhost/quizfinal/quizfinal/quizz/adm/getQuestions.php') // Certifique-se de que o caminho está correto
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        document.getElementById('quiz').innerHTML = "<p>Não há perguntas cadastradas no momento.</p>";
+                        document.getElementById('submit').style.display = 'none'; // Esconde o botão se não houver perguntas
+                    } else {
+                        quizData = data;
+                        loadQuiz();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar as perguntas:', error);
+                    document.getElementById('quiz').innerHTML = "<p>Erro ao carregar perguntas. Tente novamente mais tarde.</p>";
+                });
+        }
 
-        // Função para carregar as perguntas
+        // Função para carregar uma pergunta do quiz
         function loadQuiz() {
-            if (quizData.length === 0) {
-                document.getElementById('quiz').innerHTML = "<p>Não há perguntas cadastradas no momento.</p>";
-                return;
-            }
-
             const currentQuizData = quizData[currentQuiz];
             document.getElementById('quiz').innerHTML = `
                 <div class="question">${currentQuizData.titulo_pergunta}</div>
@@ -58,26 +55,33 @@
 
         // Função para processar os resultados
         function processResults() {
-            let score = 0;
             let resultsEl = document.getElementById('results');
-            
-            // Loop pelas perguntas e verificando respostas
-            quizData.forEach((data, index) => {
-                const selectedAnswer = userAnswers[index];
-                if (selectedAnswer === data.resposta_correta.toString()) {
-                    score++;
-                }
-            });
-
             const percentage = Math.round((score / quizData.length) * 100);
 
             resultsEl.innerHTML = `
                 <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
                 <h3>Sua nota: ${percentage}%</h3>
+                <ul id="answers-summary"></ul>
             `;
+
+            const answersSummary = document.getElementById('answers-summary');
+
+            quizData.forEach((data, index) => {
+                const userAnswer = userAnswers[index];
+                const correctAnswer = data.resposta_correta;
+                const isCorrect = userAnswer === correctAnswer;
+
+                answersSummary.innerHTML += `
+                    <li>
+                        <strong>Pergunta ${index + 1}:</strong> ${data.titulo_pergunta}<br>
+                        <strong>Sua resposta:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data['opcao' + userAnswer]}</span><br>
+                        <strong>Resposta correta:</strong> ${data['opcao' + correctAnswer]}<br>
+                    </li>
+                `;
+            });
         }
 
-        // Evento ao clicar no botão de enviar
+        // Evento ao clicar no botão "Enviar Respostas"
         document.getElementById('submit').addEventListener('click', () => {
             const selectedAnswer = document.querySelector('input[name="answer"]:checked');
 
@@ -88,15 +92,22 @@
 
             userAnswers.push(selectedAnswer.value);
 
+            if (selectedAnswer.value === quizData[currentQuiz].resposta_correta) {
+                score++;
+            }
+
             currentQuiz++;
 
             if (currentQuiz < quizData.length) {
                 loadQuiz(); // Carregar a próxima pergunta
             } else {
                 processResults(); // Processar resultados no final
-                document.getElementById('submit').style.display = 'none'; // Esconder o botão
+                document.getElementById('submit').style.display = 'none'; // Esconder o botão ao final
             }
         });
+
+        // Carregar as perguntas ao iniciar
+        loadQuizData();
     </script>
 </body>
 
