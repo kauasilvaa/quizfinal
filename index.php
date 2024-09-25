@@ -22,7 +22,6 @@
         </div>
         <div class="nav-button">
         <button class="btn white-btn" id="loginBtn" onclick="window.location.href='login.php'">Login</button>
-            <button class="btn" id="registerBtn" onclick="register()">login</button>
         </div>
         <div class="nav-menu-btn">
             <i class="bx bx-menu" onclick="myMenuFunction()"></i>
