@@ -7,8 +7,8 @@ if (!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso'] != 1) {
     exit();
 }
 
-require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
-require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/MVC/Controller/UserController';
+require_once 'C:\xampp\htdocs\quizfinal\quizz\db\config.php';
+require_once 'C:\xampp\htdocs\quizfinal\quizz\MVC\Controller\UserController';
 
 // Carrega a lógica de controle dos usuários
 $usersController = new UserController($pdo);
