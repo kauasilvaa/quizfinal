@@ -67,7 +67,7 @@ button {
 }
 
 button:hover {
-    background-color: blue;
+    background-color: #0056b3;
 }
 
 .mensagem {
@@ -78,5 +78,5 @@ button:hover {
 }
 
 .voltar {
-background-color: #0056b3;
+background-color: rgb(51, 0, 42);
 }
