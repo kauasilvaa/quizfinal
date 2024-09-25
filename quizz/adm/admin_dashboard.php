@@ -33,7 +33,7 @@ $users = $usersController->listUsers();
     <div class="admin-wrapper">
         <nav class="admin-nav">
             <div class="nav-logo">
-                <img src="quizz/img/logo.jfif" class="logo">
+                <img src="../img/logo.jfif" class="logo">
                 <h1>Admin Dashboard</h1>
             </div>
             <div class="nav-menu">
