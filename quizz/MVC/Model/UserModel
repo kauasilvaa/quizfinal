@@ -8,11 +8,11 @@ class UserModel
         $this->pdo = $pdo;
     }
 
-    public function createUser($nome, $nomedeusuario, $email, $senha, $nivel_acesso)
+    public function createUser($nome, $nomedeusuario, $email, $senha)
     {
         $sql = "INSERT INTO usuarios (nome, nomedeusuario, email, senha, nivel_acesso) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nome, $nomedeusuario, $email, $senha, $nivel_acesso]);
+        $stmt->execute([$nome, $nomedeusuario, $email, $senha, 0]);
         return $stmt->rowCount();
     }
 
@@ -47,7 +47,7 @@ class UserModel
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch();
 
-            // Verifica a senha usando password_verify
+            // Verifica a senha usando password_verifyy
             if ($usuario['senha'] == $senha) {
                 // Login bem-sucedido
                 return true;

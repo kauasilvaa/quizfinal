@@ -10,15 +10,14 @@ if (
     isset($_POST['nome']) &&
     isset($_POST['nomedeusuario']) &&
     isset($_POST['email']) &&
-    isset($_POST['senha']) 
+    isset($_POST['senha'])
 ) {
     $usersController->createUser(
         $_POST['nome'], 
         $_POST['nomedeusuario'], 
         $_POST['email'], 
         $_POST['senha'], 
-        0
-
+        $_POST['nivel_acesso'], // Passando o nível de acesso para o controlador
     );
 
     $_SESSION['message'] = 'Cadastro realizado com sucesso!';
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
     $resultado = $usersController->fazerlogin($_POST['nomedeusuario'], $_POST['senha']);
     
     if ($resultado) {
-        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessão
+        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessãoo
         $_SESSION['nome'] = $resultado['nome']; // Salva o nome do usuário
         $_SESSION['nivel_acesso'] = $resultado['nivel_acesso']; // Salva o nível de acesso na sessão
         

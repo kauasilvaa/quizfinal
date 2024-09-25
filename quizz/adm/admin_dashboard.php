@@ -39,7 +39,7 @@ $users = $usersController->listUsers();
             <div class="nav-menu">
                 <ul>
                     <li><a href="admin_dashboard.php" class="link active">Dashboard</a></li>
-                    <li><a href="manage_users.php" class="link">Gerenciar Usuários</a></li>
+                    <li><a href="../adm/cadastroperguntas.php" class="link">Cadastro Perguntas</a></li>
                     <li><a href="reports.php" class="link">Relatórios</a></li>
                     <li><a href="settings.php" class="link">Configurações</a></li>
                 </ul>
