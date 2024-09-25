@@ -7,7 +7,7 @@ if (!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso'] != 1) {
     exit();
 }
 
-require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
+require_once 'C:\xampp\htdocs\quizfinal\quizz\db\config.php';
 
 // Verifica se o formulário de cadastro de perguntas foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo_pergunta'])) {

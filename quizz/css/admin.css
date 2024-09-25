@@ -7,7 +7,7 @@
 
 
 .admin-nav {
-    background-color: #333;
+    background-color: #62C6FF;
     color: white;
     padding: 1em;
     display: flex;
@@ -21,8 +21,9 @@
 }
 
 .admin-nav .nav-logo img {
-    width: 50px;
+    width: 80px;
     margin-right: 10px;
+    border-radius: 8px;
 }
 
 .admin-nav .nav-menu ul {
@@ -70,7 +71,7 @@ table th {
 
 table td a.btn {
     color: white;
-    background-color: blue;
+    background-color: #007bff;
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 5px;

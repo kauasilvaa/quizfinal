@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
-require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/MVC/Controller/UserController';
+require_once 'C:\xampp\htdocs\quizfinal\quizz\db\config.php';
+require_once 'C:\xampp\htdocs\quizfinal\quizz\MVC\Controller\UserController';
 
 $usersController = new UserController($pdo);
 
@@ -16,7 +16,8 @@ if (
         $_POST['nome'], 
         $_POST['nomedeusuario'], 
         $_POST['email'], 
-        $_POST['senha']
+        $_POST['senha'], 
+        $_POST['nivel_acesso'], // Passando o nível de acesso para o controlador
     );
 
     $_SESSION['message'] = 'Cadastro realizado com sucesso!';
@@ -67,9 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
                 <img src="quizz/img/logo.jfif" class="logo">
             </div>
             <div class="nav-menu" id="navMenu">
-                <ul>
-                    <li><a href="#" class="link active">Home</a></li>
-                </ul>
+                
             </div>
             <div class="nav-button">
                 <button class="btn white-btn" id="loginBtn" onclick="login()">Entrar</button>
@@ -87,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
             <div class="login-container" id="login">
                 <form method="post">
                     <div class="top">
-                        <span>Não tem uma conta? <a href="#" onclick="register()">Faça Aqui</a></span>
+                        <span>Não tem uma conta? <a href="#" onclick="register()">Crie Aqui</a></span>
                         <header>Login</header>
                     </div>
                     <div class="input-box">
@@ -108,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
             <!------------------- registration form --------------------------->
             <form method="post" class="register-container" id="register">
                 <div class="top">
-                    <span>Tem uma Conta? <a href="#" onclick="login()">Login</a></span>
+                    <span>Já tem uma Conta? <a href="#" onclick="login()">Login</a></span>
                     <header>Cadastrar</header>
                 </div>
                 <div class="two-forms">
