@@ -32,14 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo_pergunta'])) {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Pergunta</title>
     <link rel="stylesheet" href="../css/cadastroperguntas.css">
 </head>
-
 <body>
     <div class="container">
         <div class="form-wrapper">
@@ -78,5 +76,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo_pergunta'])) {
         </div>
     </div>
 </body>
-
 </html>

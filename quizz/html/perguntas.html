@@ -1,23 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
     <link rel="stylesheet" href="../css/perguntas.css">
 </head>
+
 <body>
     <div class="quiz-container">
         <h1>Quiz</h1>
         <div id="quiz"></div>
         <button id="submit">Enviar Respostas</button>
         <div id="results"></div>
-        <!-- Elemento para o efeito de explosão -->
-<div class="explosion" id="explosion"></div>
-
     </div>
-   
 
-    <script src="../js/quiz-data.js"></script>
+    <script>
+        let quizData = [];
+        let currentQuiz = 0;
+        let userAnswers = [];
+
+        // Função para carregar as perguntas do servidor
+        fetch('http://localhost/quizfinal/quizfinal/quizz/adm/getQuestions.php') // Use o caminho correto
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Verifique os dados no console
+                quizData = data;
+                loadQuiz();
+            })
+            .catch(error => {
+                console.error('Erro ao carregar as perguntas:', error);
+                document.getElementById('quiz').innerHTML = "<p>Erro ao carregar perguntas. Tente novamente mais tarde.</p>";
+            });
+
+        // Função para carregar as perguntas
+        function loadQuiz() {
+            if (quizData.length === 0) {
+                document.getElementById('quiz').innerHTML = "<p>Não há perguntas cadastradas no momento.</p>";
+                return;
+            }
+
+            const currentQuizData = quizData[currentQuiz];
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">${currentQuizData.titulo_pergunta}</div>
+                <label><input type="radio" name="answer" value="1"> ${currentQuizData.opcao1}</label><br>
+                <label><input type="radio" name="answer" value="2"> ${currentQuizData.opcao2}</label><br>
+                <label><input type="radio" name="answer" value="3"> ${currentQuizData.opcao3}</label><br>
+                <label><input type="radio" name="answer" value="4"> ${currentQuizData.opcao4}</label>
+            `;
+        }
+
+        // Função para processar os resultados
+        function processResults() {
+            let score = 0;
+            let resultsEl = document.getElementById('results');
+            
+            // Loop pelas perguntas e verificando respostas
+            quizData.forEach((data, index) => {
+                const selectedAnswer = userAnswers[index];
+                if (selectedAnswer === data.resposta_correta.toString()) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / quizData.length) * 100);
+
+            resultsEl.innerHTML = `
+                <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
+                <h3>Sua nota: ${percentage}%</h3>
+            `;
+        }
+
+        // Evento ao clicar no botão de enviar
+        document.getElementById('submit').addEventListener('click', () => {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+            if (!selectedAnswer) {
+                alert("Por favor, selecione uma resposta.");
+                return;
+            }
+
+            userAnswers.push(selectedAnswer.value);
+
+            currentQuiz++;
+
+            if (currentQuiz < quizData.length) {
+                loadQuiz(); // Carregar a próxima pergunta
+            } else {
+                processResults(); // Processar resultados no final
+                document.getElementById('submit').style.display = 'none'; // Esconder o botão
+            }
+        });
+    </script>
 </body>
+
 </html>

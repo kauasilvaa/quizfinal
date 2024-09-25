@@ -1,0 +1,15 @@
+<?php
+require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
+
+// Busca as perguntas no banco de dados
+$stmt = $pdo->prepare("SELECT * FROM perguntas");
+if ($stmt->execute()) {
+    $perguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Retorna as perguntas em formato JSON
+    header('Content-Type: application/json');
+    echo json_encode($perguntas);
+} else {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Não foi possível buscar as perguntas.']);
+}
+?>

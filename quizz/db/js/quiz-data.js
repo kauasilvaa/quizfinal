@@ -1,87 +1,39 @@
-// Banco de dados com perguntas e respostas atualizadas
-const quizData = [
-    {
-        question: "(ITA) Assinale a opção relativa aos números de oxidação CORRETOS do átomo de cloro nos compostos KCIO3, Ca(CIO)2, Mg(CO3)2 e Ba(CIO4)2, respectivamente? (DIFÍCIL)",
-        a: "-1,-1,-1e-1",
-        b: "+3, +2, +4 e +6",
-        c: "+3, +1, +5, +7",
-        d: "+3, +1, +5, +0",
-        correct: "c",
-        conclusion: "O cloro possui diferentes números de oxidação nos compostos citados: +5 em KClO3, +1 em Ca(ClO)2, +7 em Ba(ClO4)2. Esses números indicam os diferentes estados de oxidação que o cloro pode assumir."
-    },
-    {
-        question: "(FUNREI) Com relação à reação Zn + HgSO→ ZnSO4 + Hg, qual é a afirmativa INCORRETA? (MÉDIO)",
-        a: "A reação é do tipo oxirredução",
-        b: "O mercúrio se oxidou pela ação do zinco",
-        c: "O número de oxidação do enxofre não variou",
-        d: "O zinco foi o agente redutor",
-        correct: "b",
-        conclusion: "O mercúrio foi reduzido, não oxidado. O zinco atuou como agente redutor, liberando elétrons e aumentando seu número de oxidação."
-    },
-    {
-        question: "Qual é o maior oceano do mundo?",
-        a: "Oceano Atlântico",
-        b: "Oceano Índico",
-        c: "Oceano Ártico",
-        d: "Oceano Pacífico",
-        correct: "d",
-        conclusion: "O Oceano Pacífico é o maior oceano do mundo, cobrindo aproximadamente 63 milhões de milhas quadradas."
-    },
-    {
-        question: "Em que ano o homem pisou na Lua pela primeira vez?",
-        a: "1959",
-        b: "1969",
-        c: "1979",
-        d: "1989",
-        correct: "b",
-        conclusion: "Neil Armstrong pisou na Lua pela primeira vez em 1969, durante a missão Apollo 11, tornando-se o primeiro humano a caminhar em outro corpo celeste."
-    },
-    {
-        question: "Qual país é conhecido como a Terra do Sol Nascente?",
-        a: "China",
-        b: "Coreia do Sul",
-        c: "Japão",
-        d: "Tailândia",
-        correct: "c",
-        conclusion: "O Japão é conhecido como a 'Terra do Sol Nascente' por sua localização a leste do continente asiático, onde o sol nasce primeiro."
-    },
-    {
-        question: "Qual é o animal terrestre mais rápido do mundo?",
-        a: "Leopardo",
-        b: "Tigre",
-        c: "Guepardo",
-        d: "Leão",
-        correct: "c",
-        conclusion: "O guepardo é o animal terrestre mais rápido do mundo, podendo atingir velocidades de até 112 km/h em curtas distâncias."
-    },
-    {
-        question: "Qual é o elemento químico representado pela letra 'O'?",
-        a: "Ouro",
-        b: "Oxigênio",
-        c: "Ósmio",
-        d: "Óxido",
-        correct: "b",
-        conclusion: "O símbolo 'O' representa o oxigênio, um elemento essencial para a respiração e a combustão."
-    }
-];
-
 const quiz = document.getElementById('quiz');
 const submitBtn = document.getElementById('submit');
 const resultsEl = document.getElementById('results');
 let currentQuiz = 0;
 let score = 0;
 let userAnswers = [];
+let quizData = [];
 
-// Função para carregar as perguntas
+// Função para carregar as perguntas do servidor
+function loadQuizData() {
+    fetch('quizfinal/quizfinal/quizz/adm/getQuestions.php') // Requisição para o PHP que retorna as perguntas do banco
+        .then(response => response.json()) // Converte a resposta em JSON
+        .then(data => {
+            quizData = data; // Armazena os dados das perguntas
+            loadQuiz(); // Carrega a primeira pergunta
+        })
+        .catch(error => {
+            console.error('Erro ao carregar as perguntas:', error);
+        });
+}
+
+// Função para carregar uma pergunta
 function loadQuiz() {
+    if (quizData.length === 0) {
+        quiz.innerHTML = "<p>Não há perguntas cadastradas no momento.</p>";
+        return;
+    }
+
     const currentQuizData = quizData[currentQuiz];
     
     quiz.innerHTML = `
-        <div class="question">${currentQuizData.question}</div>
-        <label><input type="radio" name="answer" value="a"> ${currentQuizData.a}</label><br>
-        <label><input type="radio" name="answer" value="b"> ${currentQuizData.b}</label><br>
-        <label><input type="radio" name="answer" value="c"> ${currentQuizData.c}</label><br>
-        <label><input type="radio" name="answer" value="d"> ${currentQuizData.d}</label>
+        <div class="question">${currentQuizData.titulo_pergunta}</div>
+        <label><input type="radio" name="answer" value="a"> ${currentQuizData.opcao1}</label><br>
+        <label><input type="radio" name="answer" value="b"> ${currentQuizData.opcao2}</label><br>
+        <label><input type="radio" name="answer" value="c"> ${currentQuizData.opcao3}</label><br>
+        <label><input type="radio" name="answer" value="d"> ${currentQuizData.opcao4}</label>
     `;
 }
 
@@ -120,8 +72,8 @@ function processResults() {
         const isCorrect = userAnswer === data.correct;
         const answerText = `
             <li>
-                <strong>Pergunta ${index + 1}:</strong> ${data.question}<br>
-                <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[userAnswer]}</span><br>
+                <strong>Pergunta ${index + 1}:</strong> ${data.titulo_pergunta}<br>
+                <strong>Resposta sua:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data[`opcao${userAnswer}`]}</span><br>
                 <strong>Conclusão:</strong> ${data.conclusion}
             </li>
         `;
@@ -164,5 +116,5 @@ submitBtn.addEventListener('click', () => {
     }
 });
 
-// Carregar o primeiro quiz
-loadQuiz();
+// Carregar as perguntas do servidor ao iniciar
+loadQuizData();
