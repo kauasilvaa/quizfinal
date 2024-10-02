@@ -6,7 +6,7 @@ if (!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso'] != 1) {
     exit();
 }
 
-require_once 'config.php';
+require_once 'C:/xampp/htdocs/quizfinal/quizfinal/quizz/db/config.php';
 
 $id_usuario = $_GET['id_usuario'] ?? null;
 
