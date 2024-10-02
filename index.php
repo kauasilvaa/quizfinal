@@ -47,7 +47,6 @@
                         <a class="filter-item" href="#">Biologia</a>
                         <a class="filter-item" href="#">História</a>
                         <a class="filter-item" href="#">Geografia</a>
-                        <a class="filter-item" href="#">Filosofia</a>
                         <a class="filter-item" href="#">Sociologia</a>
                     </div>
                 </div>
