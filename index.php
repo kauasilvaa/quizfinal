@@ -6,35 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <title>Bem-Vindo ao Quiz</title>
-    <style>
-        .filter-container {
-            position: relative;
-            display: inline-block;
-        }
-        .filter-menu {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .filter-item {
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
-        }
-        .filter-item:hover {
-            background-color: #f1f1f1;
-        }
-        .filter-container:hover .filter-menu {
-            display: block;
-        }
-        .question-select {
-            margin-top: 15px;
-        }
-    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -70,16 +41,17 @@
                         <span class="filter-icon">&#9662;</span>
                     </button>
                     <div class="filter-menu">
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('Matemática')">Matemática</a>
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('Português')">Português</a>
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('Física')">Física</a>
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('Biologia')">Biologia</a>
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('História')">História</a>
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('Geografia')">Geografia</a>
-                        <a class="filter-item" href="#" onclick="showQuestionSelect('Sociologia')">Sociologia</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Matemática')">Matemática</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Português')">Português</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Física')">Física</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Biologia')">Biologia</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('História')">História</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Geografia')">Geografia</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Sociologia')">Sociologia</a>
                     </div>
                 </div>
 
+                <!-- Seleção de número de questões -->
                 <div id="questionSelectContainer" class="question-select" style="display:none;">
                     <h4 id="selectedSubject"></h4>
                     <label for="questionNumber">Número de questões:</label>
@@ -90,24 +62,34 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <a class="btn btn-success mt-3" href="#" id="startQuizBtn">Iniciar Simulado</a>
+                    <button class="btn btn-success mt-3" id="startQuizBtn" onclick="startQuiz()">Iniciar Quiz</button>
                 </div>
+
+                <!-- Botão de Realizar Simulado -->
+                <a id="realizarSimuladoBtn" class="btn btn-level" href="quizz/html/perguntas.html">Realizar Simulado</a>
+
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function showQuestionSelect(subject) {
+    let selectedSubject = "";
+
+    // Função para selecionar a matéria
+    function selectSubject(subject) {
+        selectedSubject = subject;
         document.getElementById('questionSelectContainer').style.display = 'block';
         document.getElementById('selectedSubject').innerText = 'Matéria Selecionada: ' + subject;
-        
-        // Atualiza o link do botão para incluir a matéria e o número de questões
-        document.getElementById('startQuizBtn').onclick = function() {
-            var numQuestions = document.getElementById('questionNumber').value;
-            window.location.href = 'quizz/html/perguntas.html?materia=' + subject + '&numQuestoes=' + numQuestions;
-        }
+
+        // Esconder o botão de "Realizar Simulado"
+        document.getElementById('realizarSimuladoBtn').style.display = 'none';
+    }
+
+    // Função para iniciar o quiz e enviar as escolhas para a nova página
+    function startQuiz() {
+        var numQuestions = document.getElementById('questionNumber').value;
+        window.location.href = "quiz.php?subject=" + encodeURIComponent(selectedSubject) + "&numQuestions=" + numQuestions;
     }
 </script>
 </body>

@@ -40,8 +40,7 @@ $users = $usersController->listUsers();
                 <ul>
                     <li><a href="admin_dashboard.php" class="link active">Dashboard</a></li>
                     <li><a href="../adm/cadastroperguntas.php" class="link">Cadastro Perguntas</a></li>
-                    <li><a href="reports.php" class="link">Relatórios</a></li>
-                    <li><a href="settings.php" class="link">Configurações</a></li>
+                    <li><a href="../../index.php" class="link">Página Inicial</a></li
                 </ul>
             </div>
             <div class="nav-logout">
