@@ -47,6 +47,8 @@
                         <a class="filter-item" href="#" onclick="selectSubject('Biologia')">Biologia</a>
                         <a class="filter-item" href="#" onclick="selectSubject('História')">História</a>
                         <a class="filter-item" href="#" onclick="selectSubject('Geografia')">Geografia</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Filosofia')">Filosofia</a>
+                        <a class="filter-item" href="#" onclick="selectSubject('Artes')">Artes</a>
                         <a class="filter-item" href="#" onclick="selectSubject('Sociologia')">Sociologia</a>
                     </div>
                 </div>
