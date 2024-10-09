@@ -5,61 +5,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="quiz.css">
     <title>Quiz</title>
     <style>
-        .question {
-            margin-top: 20px;
-        }
-
-        .answer-btn {
-            margin: 5px;
-        }
-
-        .justification {
-            margin-top: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            display: none;
-        }
-
-        .next-btn {
-            margin-top: 20px;
-            display: none;
+        body {
+            background: linear-gradient(135deg, #1d2671 30%, #c33764);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
         }
 
         .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
         }
 
-        #quizSubject {
+        h1, h3 {
             text-align: center;
             margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            color: #ffeb3b;
+        }
+
+        .question {
+            margin: 20px 0;
+            padding: 15px;
+            background: #212121;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid #ffeb3b;
+        }
+
+        .options-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .options-container label {
+            display: block;
+            margin: 15px auto;
+            padding: 10px;
+            background: #303030;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .options-container label:hover {
+            background: #ffeb3b;
+            color: #000;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + label {
+            background: #4caf50;
+            border-color: #4caf50;
+            color: #fff;
+        }
+
+        .btn {
+            border-radius: 25px;
+            font-size: 1.1rem;
+            padding: 10px 30px;
+            transition: background 0.3s ease;
+            margin: 10px;
+        }
+
+        .conclude-btn, .back-btn, .next-btn {
+            background-color: #ffeb3b;
+            color: #000;
+            display: none;
+        }
+
+        .conclude-btn:hover, .back-btn:hover, .next-btn:hover {
+            background-color: #ffd700;
+        }
+
+        .justify-content-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .justification {
+            color: #ffeb3b;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 id="quizSubject"></h1>
+    <div class="container">
+        <h1 id="quizSubject">Carregando...</h1>
         <div id="questionContainer"></div>
-        <button id="nextQuestionBtn" class="btn btn-primary next-btn" onclick="nextQuestion()">Avançar</button>
+        <div class="justify-content-center">
+            <button id="nextBtn" class="btn next-btn" onclick="goToNextQuestion()">Próxima</button>
+            <button id="concludeQuizBtn" class="btn conclude-btn" onclick="concludeQuiz()">Concluir</button>
+            <button id="backBtn" class="btn back-btn" onclick="goBack()">Voltar</button>
+        </div>
     </div>
 
     <script>
-        // Função para obter parâmetros da URL
         function getQueryParams() {
             let params = {};
-            window.location.search.substring(1).split("&").forEach(function(pair) {
+            window.location.search.substring(1).split("&").forEach(function (pair) {
                 let [key, value] = pair.split("=");
                 params[decodeURIComponent(key)] = decodeURIComponent(value);
             });
             return params;
         }
+
+
+
      
         // Perguntas por matéria (adicione aqui suas perguntas, opções, respostas e justificativas)
         var questionsData = {
@@ -110,7 +199,7 @@
                     question: "Há um grande silêncio que está sempre à escuta…E a gente se põe a dizer inquietamente qualquer coisa,qualquer coisa, seja o que for,desde a corriqueira dúvida sobre se chove ou não chove hojeaté a tua dúvida metafísica1 [...]!E, por todo o sempre, enquanto a gente fala, fala, falao silêncio escuta…e cala.*Vocabulário: 1metafísica: área que estuda e tenta explicar as principais questões do pensamento filosófico, como a existência do ser, a causa e o sentido da realidade, e os aspectos ligados a natureza. Nesse texto, em qual verso foi utilizado o recurso da personificação?",
                     options: ["A) “o silêncio escuta…”. (3ª estrofe)", "B) “E, por todo o sempre, enquanto a gente fala, fala, fala”. (3ª estrofe)", "C)  “até a tua dúvida metafísica [...]!” (2ª estrofe)", "D) “qualquer coisa, seja o que for,”. (2ª estrofe)"],
                     correctAnswer: 0,
-                    justification: "A resposta correta é a letra E (“o silêncio escuta…”). Nesse verso, ocorre o recurso da personificação, pois o silêncio, uma entidade abstrata, é descrito como se tivesse a capacidade humana de escutar, o que caracteriza a atribuição de qualidades humanas a algo não humano."
+                    justification: "A resposta correta é a letra A (“o silêncio escuta…”). Nesse verso, ocorre o recurso da personificação, pois o silêncio, uma entidade abstrata, é descrito como se tivesse a capacidade humana de escutar, o que caracteriza a atribuição de qualidades humanas a algo não humano."
                 },
                 {
                     question: "Há um grande silêncio que está sempre à escuta…E a gente se põe a dizer inquietamente qualquer coisa,qualquer coisa, seja o que for,desde a corriqueira dúvida sobre se chove ou não chove hojeaté a tua dúvida metafísica1 [...]!E, por todo o sempre, enquanto a gente fala, fala, falao silêncio escuta…e cala.*Vocabulário: 1metafísica: área que estuda e tenta explicar as principais questões do pensamento filosófico, como a existência do ser, a causa e o sentido da realidade, e os aspectos ligados a natureza. Entende-se desse texto que o eu lírico",
@@ -122,7 +211,7 @@
                     question: "Seara VermelhaOs colonos [...] da fazenda estavam espalhados pelas estradas da caatinga. Iam todos no rumo do sul, em busca do país de São Paulo. Muitos outros haviam ido antes, os contratantes de trabalhadores apareciam pelas fazendas, contavam histórias, diziam coisas de assombrar [...]. Cada trabalhador que chegava era fazendeiro em poucos anos [...].Eram esses mesmos caminhos, essas trilhas abertas na caatinga, que Jerônimo e seu irmão João Pedro trilhavam agora com suas famílias. Dinah, mulher de João Pedro, [...] contara as pessoas e os bichos da [...] comitiva [...].Ela, o marido e a filha, Gertrudes [...]. Puxara à mãe, era um touro no trabalho [...]. E a família de Jerônimo. Ele, Jucundina, os dois filhos e os três netos [...]. Faziam onze mas Dinah contava também Jeremias e Marisca.Jeremias ia na frente, Jerônimo puxava do cabresto, às vezes entregava a Tonho. Ia carregado com dois caçuás1 , onde levavam quase tudo o que possuíam. O resto estava nas trouxas que mulheres e homens conduziam [...]. Jeremias marchava no seu passo tardo, sem pressa [...].Naquele primeiro dia eles fizeram cinco léguas compridas, que eram quantas os separavam da fazenda Primavera. Chegaram com a noite quando Jeremias começava a empacar pelo caminho. Noca ia atrás de todos, quase não se aguentava de cansada, a gata apertada contra o peito. O contexto social a que se refere esse texto é",
                     options: ["A) A construção de estradas que interligam estados brasileiros.", "B) A importância da pecuária do Brasil.", "C) O crescimento da extração da borracha.", "D) O movimento migratório em direção ao estado de São Paulo."],
                     correctAnswer: 3,
-                    justification: "A opção correta é: E) O movimento migratório em direção ao estado de São Paulo. O texto descreve um grupo de trabalhadores rurais que estão migrando em busca de melhores condições de vida, especificamente em direção ao estado de São Paulo, um destino comum para muitos migrantes em busca de trabalho e oportunidades no Brasil durante o período retratado."
+                    justification: "A opção correta é: D) O movimento migratório em direção ao estado de São Paulo. O texto descreve um grupo de trabalhadores rurais que estão migrando em busca de melhores condições de vida, especificamente em direção ao estado de São Paulo, um destino comum para muitos migrantes em busca de trabalho e oportunidades no Brasil durante o período retratado."
                 },
                 // Continue inserindo as perguntas e justificativas para Português
             ],
@@ -215,7 +304,7 @@
                     question: "É bastante difundida a ideia de que o berço da democracia foi a cidade de Atenas, da Antiga Grécia, onde os cidadãos alcançaram possibilidades de participar das discussões das questões públicas. Sabe-se, contudo, que havia exceções e graves problemas sociais, políticos e econômicos. Caracteriza uma dessas exceções:",
                     options: ["a) o fato de mulheres não possuírem direitos políticos, na medida em que a democracia ateniense era restrita aos homens adultos, considerados cidadãos", "b) a Eclésia, assembleia popular, com as reformas de Clístenes, que teve seus poderes ampliados, fortalecendo a prática democrática.", "c) o ostracismo (exílio por dez anos), que era um instrumento de defesa da democracia ateniense para quem a pusesse em perigo", "d) o fato de a democracia ateniense ter posto fim às brigas sociais, possibilitando aos camponeses o direito de voto."],
                     correctAnswer: 0,
-                    justification: "Apesar das outras estarem corretas, a que se refere à exceção democrática é a letra b.Em Atenas, quem tinha o direto de participar da vida pública, o que eram considerados cidadãos eram os homens, com mais de 21 anos e filhos de atenienses.Mulheres, escravos, estrangeiros, comerciantes e artesãos não poderiam fazer parte das assembleias nem participar das decisões politicas que envolviam a comunidade.Assim, a democracia não tinha o mesmo cunho ideológico que a nossa democracia atualmente."
+                    justification: "Apesar das outras estarem corretas, a que se refere à exceção democrática é a letra B. Em Atenas, quem tinha o direto de participar da vida pública, o que eram considerados cidadãos eram os homens, com mais de 21 anos e filhos de atenienses.Mulheres, escravos, estrangeiros, comerciantes e artesãos não poderiam fazer parte das assembleias nem participar das decisões politicas que envolviam a comunidade.Assim, a democracia não tinha o mesmo cunho ideológico que a nossa democracia atualmente."
                 },
                 {
                     question: "(ufpr) Considerando os eventos da Reforma Protestante (iniciada em 1517) e seus desdobramentos na Idade Moderna, uma concepção religiosa reforçada pelos seguidores da Reforma em relação ao cristianismo vigente na época foi a: ",
@@ -254,7 +343,7 @@
                     question: "(Enem/2012)Um pequeno país com região plana, chuvosa e com ventos constantes, e poucos recursos hídricos, precisa definir sua matriz energética com menor impacto ambiental. Qual seria a melhor opção?",
                     options: ["a) Biocombustíveis.", "b) Energia solar.", "c) Energia nuclear.", "d) Energia eólica."],
                     correctAnswer: 3,
-                    justification: "Resposta: e) Energia eólica. Em um país com ventos constantes e poucas opções hídricas, a energia eólica seria a escolha ideal, sendo uma fonte limpa, renovável e eficiente, especialmente em regiões planas e com boa circulação de ventos."
+                    justification: "Resposta: D) Energia eólica. Em um país com ventos constantes e poucas opções hídricas, a energia eólica seria a escolha ideal, sendo uma fonte limpa, renovável e eficiente, especialmente em regiões planas e com boa circulação de ventos."
                 },
                 // Continue inserindo as perguntas e justificativas para Geografia
             ],
@@ -385,75 +474,120 @@
             ]
         };
 
-        var currentQuestionIndex = 0; // Controla o índice da pergunta atual
-        var subject = ''; // Guarda o assunto selecionado
+        var currentQuestionIndex = 0;
+        var subject = '';
+        var selectedAnswers = [];
+        var score = 0;
 
-        // Função para exibir perguntas
+        // Exibir pergunta e opções
         function displayQuestion(subject, index) {
             var questionContainer = document.getElementById('questionContainer');
-            var questionObj = questionsData[subject][index];
+            var questionObj = questionsData[subject] && questionsData[subject][index];
 
-            // Limpar conteúdo anterior
+            if (!questionObj) {
+                console.error("Nenhuma pergunta encontrada para o assunto: " + subject);
+                questionContainer.innerHTML = "<p>Erro: Nenhuma pergunta encontrada para este assunto.</p>";
+                return;
+            }
+
             questionContainer.innerHTML = "";
 
-            // Adicionar pergunta
             var questionElem = document.createElement('div');
             questionElem.className = 'question';
             questionElem.innerHTML = "<strong>" + (index + 1) + ". " + questionObj.question + "</strong>";
             questionContainer.appendChild(questionElem);
 
-            // Adicionar opções de resposta
-            questionObj.options.forEach(function(option, idx) {
-                var button = document.createElement('button');
-                button.className = "btn btn-outline-primary answer-btn";
-                button.innerText = option;
-                button.onclick = function() {
-                    showJustification(questionObj, idx);
-                };
-                questionContainer.appendChild(button);
+            var optionsContainer = document.createElement('div');
+            optionsContainer.className = 'options-container';
+            questionObj.options.forEach(function (option, idx) {
+                var radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'question' + index;
+                radio.value = idx;
+                radio.id = 'option' + index + '_' + idx;
+
+                radio.addEventListener('change', function() {
+                    selectedAnswers[index] = parseInt(this.value); // Armazena a resposta selecionada para a questão
+                    document.getElementById('nextBtn').style.display = "block"; // Exibe o botão "Próxima" após selecionar a resposta
+                });
+
+                var label = document.createElement('label');
+                label.setAttribute("for", 'option' + index + '_' + idx);
+                label.appendChild(document.createTextNode(option));
+                optionsContainer.appendChild(radio);
+                optionsContainer.appendChild(label);
             });
+            questionContainer.appendChild(optionsContainer);
 
-            // Criar um elemento para a justificativa
-            var justificationElem = document.createElement('div');
-            justificationElem.className = "justification";
-            questionContainer.appendChild(justificationElem);
-        }
-
-        // Função para exibir a justificativa da resposta
-        function showJustification(questionObj, selectedAnswer) {
-            var justificationElem = document.querySelector('.justification');
-
-            // Verifica se a resposta está correta ou não
-            if (selectedAnswer === questionObj.correctAnswer) {
-                justificationElem.innerHTML = "Correto! " + questionObj.justification;
-                justificationElem.style.color = "green";
+            // Verifica se a pergunta atual é a última e alterna os botões de "Próxima" e "Concluir"
+            if (index === questionsData[subject].length - 1) {
+                document.getElementById('nextBtn').style.display = "none";
+                document.getElementById('concludeQuizBtn').style.display = "block";
             } else {
-                justificationElem.innerHTML = "Incorreto. " + questionObj.justification;
-                justificationElem.style.color = "red";
+                document.getElementById('concludeQuizBtn').style.display = "none";
             }
-
-            justificationElem.style.display = "block"; // Exibir justificativa
-            document.getElementById('nextQuestionBtn').style.display = "block"; // Exibir botão de avançar
         }
 
         // Função para avançar para a próxima pergunta
-        function nextQuestion() {
+        function goToNextQuestion() {
             currentQuestionIndex++;
             if (currentQuestionIndex < questionsData[subject].length) {
-                displayQuestion(subject, currentQuestionIndex); // Exibir próxima pergunta
-                document.getElementById('nextQuestionBtn').style.display = "none"; // Esconder botão de avançar até nova resposta
-            } else {
-                document.getElementById('questionContainer').innerHTML = "<h3>Quiz concluído!</h3>";
-                document.getElementById('nextQuestionBtn').style.display = "none"; // Esconder botão de avançar no fim
+                displayQuestion(subject, currentQuestionIndex);
+                document.getElementById('nextBtn').style.display = "none"; // Esconde o botão até a próxima resposta
             }
         }
 
-        // Executar ao carregar a página
-        window.onload = function() {
+        // Concluir o quiz e exibir resultados
+        function concludeQuiz() {
+            var questionContainer = document.getElementById('questionContainer');
+            questionContainer.innerHTML = "";
+
+            var resultElem = document.createElement('h3');
+            resultElem.innerHTML = "Você acertou " + score + " de " + questionsData[subject].length + " perguntas.";
+            questionContainer.appendChild(resultElem);
+
+            questionsData[subject].forEach(function (question, idx) {
+                var justificationElem = document.createElement('div');
+                justificationElem.className = 'justification';
+
+                if (selectedAnswers[idx] === question.correctAnswer) {
+                    score++;
+                    justificationElem.innerHTML = "Questão " + (idx + 1) + ": Correto! Justificativa: " + question.justification;
+                } else {
+                    justificationElem.innerHTML = "Questão " + (idx + 1) + ": Errado! Justificativa: " + question.justification;
+                }
+
+                questionContainer.appendChild(justificationElem);
+            });
+
+            document.getElementById('concludeQuizBtn').style.display = "none";
+            document.getElementById('backBtn').style.display = "block";
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Inicialização ao carregar a página
+        window.onload = function () {
             var params = getQueryParams();
             subject = params['subject'];
+
+            if (!subject) {
+                document.getElementById('quizSubject').innerText = "Assunto não especificado!";
+                console.error("O parâmetro 'subject' não foi encontrado na URL.");
+                return;
+            }
+
             document.getElementById('quizSubject').innerText = subject;
-            displayQuestion(subject, currentQuestionIndex); // Exibir primeira pergunta
+
+            if (!questionsData[subject] || questionsData[subject].length === 0) {
+                document.getElementById('questionContainer').innerText = "Não há perguntas disponíveis para o assunto selecionado.";
+                console.error("Não há perguntas disponíveis para o assunto: " + subject);
+                return;
+            }
+
+            displayQuestion(subject, currentQuestionIndex); // Exibir a primeira pergunta
         }
     </script>
 </body>
