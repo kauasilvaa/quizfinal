@@ -8,46 +8,48 @@
     <title>Quiz</title>
     <style>
         body {
-            background: linear-gradient(135deg, #1d2671 30%, #c33764);
+            background: linear-gradient(135deg, #8EC5FC 30%, #E0C3FC);
             font-family: 'Arial', sans-serif;
-            color: #fff;
+            color: #333;
         }
 
         .container {
             max-width: 900px;
             margin: 50px auto;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
+            background: #fff;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             animation: fadeIn 1s ease-out;
         }
 
-        h1, h3 {
+        h1,
+        h3 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
             font-size: 2.5rem;
+            color: #4A90E2;
         }
 
         h3 {
             font-size: 1.75rem;
-            color: #ffeb3b;
+            color: #F39C12;
         }
 
         .question {
             margin: 20px 0;
             padding: 15px;
-            background: #212121;
+            background: #f7f7f7;
             border-radius: 10px;
             text-align: center;
             font-size: 1.2rem;
             font-weight: bold;
-            border: 2px solid #ffeb3b;
+            border: 2px solid #4A90E2;
         }
 
         .options-container {
@@ -59,7 +61,7 @@
             display: block;
             margin: 15px auto;
             padding: 10px;
-            background: #303030;
+            background: #ECF0F1;
             border: 2px solid transparent;
             border-radius: 25px;
             cursor: pointer;
@@ -69,8 +71,8 @@
         }
 
         .options-container label:hover {
-            background: #ffeb3b;
-            color: #000;
+            background: #4A90E2;
+            color: #fff;
         }
 
         input[type="radio"] {
@@ -78,8 +80,8 @@
         }
 
         input[type="radio"]:checked + label {
-            background: #4caf50;
-            border-color: #4caf50;
+            background: #2ECC71;
+            border-color: #2ECC71;
             color: #fff;
         }
 
@@ -91,14 +93,33 @@
             margin: 10px;
         }
 
-        .conclude-btn, .back-btn, .next-btn {
-            background-color: #ffeb3b;
-            color: #000;
+        .next-btn {
+            background-color: #4A90E2;
+            color: #fff;
+        }
+
+        .next-btn:hover {
+            background-color: #357ABD;
+        }
+
+        .conclude-btn {
+            background-color: #F39C12;
+            color: #fff;
             display: none;
         }
 
-        .conclude-btn:hover, .back-btn:hover, .next-btn:hover {
-            background-color: #ffd700;
+        .conclude-btn:hover {
+            background-color: #E67E22;
+        }
+
+        .back-btn {
+            background-color: #E74C3C;
+            color: #fff;
+            display: none;
+        }
+
+        .back-btn:hover {
+            background-color: #C0392B;
         }
 
         .justify-content-center {
@@ -106,11 +127,24 @@
             justify-content: center;
         }
 
-        .justification {
-            color: #ffeb3b;
+        .result {
+            margin-top: 15px;
+        }
+
+        .correct {
+            color: #2ECC71;
             font-weight: bold;
-            margin-top: 10px;
-            text-align: center;
+        }
+
+        .incorrect {
+            color: #E74C3C;
+            font-weight: bold;
+        }
+
+        .justification {
+            margin-top: 5px;
+            font-style: italic;
+            color: #555;
         }
 
         @keyframes fadeIn {
@@ -118,6 +152,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
@@ -128,29 +163,16 @@
 
 <body>
     <div class="container">
-        <h1 id="quizSubject">Carregando...</h1>
+        <h1 id="quizSubject">Matemática</h1>
         <div id="questionContainer"></div>
         <div class="justify-content-center">
-            <button id="nextBtn" class="btn next-btn" onclick="goToNextQuestion()">Próxima</button>
+            <button id="nextQuestionBtn" class="btn next-btn" onclick="goToNextQuestion()">Próxima Pergunta</button>
             <button id="concludeQuizBtn" class="btn conclude-btn" onclick="concludeQuiz()">Concluir</button>
             <button id="backBtn" class="btn back-btn" onclick="goBack()">Voltar</button>
         </div>
     </div>
 
     <script>
-        function getQueryParams() {
-            let params = {};
-            window.location.search.substring(1).split("&").forEach(function (pair) {
-                let [key, value] = pair.split("=");
-                params[decodeURIComponent(key)] = decodeURIComponent(value);
-            });
-            return params;
-        }
-
-
-
-     
-        // Perguntas por matéria (adicione aqui suas perguntas, opções, respostas e justificativas)
         var questionsData = {
             'Matemática': [{
                     question: " QUESTÃO FÁCIL- (ENEM) A figura é uma representação simplificada do carrossel de um parque de diversões, visto de cima. Nessa representação, os cavalos estão identificados pelos pontos escuros, e ocupam circunferências de raios 3 m e 4 m, respectivamente, ambas centradas no ponto O. Em cada sessão de funcionamento, o carrossel efetua 10 voltas. Quantos metros uma criança sentada no cavalo C1 percorrerá a mais do que uma criança no cavalo C2, em uma sessão? Use 3,0 como aproximação para π.",
@@ -474,94 +496,62 @@
             ]
         };
 
+      
         var currentQuestionIndex = 0;
-        var subject = '';
+        var subject = 'Matemática';
         var selectedAnswers = [];
         var score = 0;
 
         // Exibir pergunta e opções
-        function displayQuestion(subject, index) {
+        function displayQuestion(index) {
             var questionContainer = document.getElementById('questionContainer');
-            var questionObj = questionsData[subject] && questionsData[subject][index];
+            var questionObj = questionsData[subject][index];
 
-            if (!questionObj) {
-                console.error("Nenhuma pergunta encontrada para o assunto: " + subject);
-                questionContainer.innerHTML = "<p>Erro: Nenhuma pergunta encontrada para este assunto.</p>";
+            questionContainer.innerHTML = `
+                <div class="question"><strong>${index + 1}. ${questionObj.question}</strong></div>
+                <div class="options-container">
+                    ${questionObj.options.map((option, idx) => `
+                        <input type="radio" id="option${index}_${idx}" name="question${index}" value="${idx}">
+                        <label for="option${index}_${idx}">${option}</label>
+                    `).join('')}
+                </div>
+            `;
+
+            document.getElementById('nextQuestionBtn').style.display = (index === questionsData[subject].length - 1) ? 'none' : 'inline-block';
+            document.getElementById('concludeQuizBtn').style.display = (index === questionsData[subject].length - 1) ? 'inline-block' : 'none';
+        }
+
+        function goToNextQuestion() {
+            if (!document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked')) {
+                alert("Selecione uma resposta.");
                 return;
             }
 
-            questionContainer.innerHTML = "";
-
-            var questionElem = document.createElement('div');
-            questionElem.className = 'question';
-            questionElem.innerHTML = "<strong>" + (index + 1) + ". " + questionObj.question + "</strong>";
-            questionContainer.appendChild(questionElem);
-
-            var optionsContainer = document.createElement('div');
-            optionsContainer.className = 'options-container';
-            questionObj.options.forEach(function (option, idx) {
-                var radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'question' + index;
-                radio.value = idx;
-                radio.id = 'option' + index + '_' + idx;
-
-                radio.addEventListener('change', function() {
-                    selectedAnswers[index] = parseInt(this.value); // Armazena a resposta selecionada para a questão
-                    document.getElementById('nextBtn').style.display = "block"; // Exibe o botão "Próxima" após selecionar a resposta
-                });
-
-                var label = document.createElement('label');
-                label.setAttribute("for", 'option' + index + '_' + idx);
-                label.appendChild(document.createTextNode(option));
-                optionsContainer.appendChild(radio);
-                optionsContainer.appendChild(label);
-            });
-            questionContainer.appendChild(optionsContainer);
-
-            // Verifica se a pergunta atual é a última e alterna os botões de "Próxima" e "Concluir"
-            if (index === questionsData[subject].length - 1) {
-                document.getElementById('nextBtn').style.display = "none";
-                document.getElementById('concludeQuizBtn').style.display = "block";
-            } else {
-                document.getElementById('concludeQuizBtn').style.display = "none";
-            }
-        }
-
-        // Função para avançar para a próxima pergunta
-        function goToNextQuestion() {
+            selectedAnswers[currentQuestionIndex] = parseInt(document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked').value);
             currentQuestionIndex++;
-            if (currentQuestionIndex < questionsData[subject].length) {
-                displayQuestion(subject, currentQuestionIndex);
-                document.getElementById('nextBtn').style.display = "none"; // Esconde o botão até a próxima resposta
-            }
+            displayQuestion(currentQuestionIndex);
         }
 
         // Concluir o quiz e exibir resultados
         function concludeQuiz() {
-            var questionContainer = document.getElementById('questionContainer');
-            questionContainer.innerHTML = "";
-
-            var resultElem = document.createElement('h3');
-            resultElem.innerHTML = "Você acertou " + score + " de " + questionsData[subject].length + " perguntas.";
-            questionContainer.appendChild(resultElem);
-
-            questionsData[subject].forEach(function (question, idx) {
-                var justificationElem = document.createElement('div');
-                justificationElem.className = 'justification';
-
-                if (selectedAnswers[idx] === question.correctAnswer) {
+            for (let i = 0; i < questionsData[subject].length; i++) {
+                if (selectedAnswers[i] === questionsData[subject][i].correctAnswer) {
                     score++;
-                    justificationElem.innerHTML = "Questão " + (idx + 1) + ": Correto! Justificativa: " + question.justification;
-                } else {
-                    justificationElem.innerHTML = "Questão " + (idx + 1) + ": Errado! Justificativa: " + question.justification;
                 }
-
-                questionContainer.appendChild(justificationElem);
-            });
-
+            }
+            document.getElementById('questionContainer').innerHTML = `
+                <h3>Você acertou ${score} de ${questionsData[subject].length} perguntas.</h3>
+                ${questionsData[subject].map((q, i) => `
+                    <div class="question"><strong>${i + 1}. ${q.question}</strong></div>
+                    <p class="${selectedAnswers[i] === q.correctAnswer ? 'correct' : 'incorrect'}">
+                        ${selectedAnswers[i] === q.correctAnswer ? 'Correto' : 'Incorreto'}
+                    </p>
+                    <p>Resposta correta: ${q.options[q.correctAnswer]}</p>
+                    <p class="justification">Justificativa: ${q.justification}</p>
+                `).join('')}
+            `;
             document.getElementById('concludeQuizBtn').style.display = "none";
-            document.getElementById('backBtn').style.display = "block";
+            document.getElementById('backBtn').style.display = "inline-block";
         }
 
         function goBack() {
@@ -570,24 +560,7 @@
 
         // Inicialização ao carregar a página
         window.onload = function () {
-            var params = getQueryParams();
-            subject = params['subject'];
-
-            if (!subject) {
-                document.getElementById('quizSubject').innerText = "Assunto não especificado!";
-                console.error("O parâmetro 'subject' não foi encontrado na URL.");
-                return;
-            }
-
-            document.getElementById('quizSubject').innerText = subject;
-
-            if (!questionsData[subject] || questionsData[subject].length === 0) {
-                document.getElementById('questionContainer').innerText = "Não há perguntas disponíveis para o assunto selecionado.";
-                console.error("Não há perguntas disponíveis para o assunto: " + subject);
-                return;
-            }
-
-            displayQuestion(subject, currentQuestionIndex); // Exibir a primeira pergunta
+            displayQuestion(currentQuestionIndex);
         }
     </script>
 </body>
