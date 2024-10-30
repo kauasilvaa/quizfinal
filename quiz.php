@@ -79,7 +79,7 @@
             display: none;
         }
 
-        input[type="radio"]:checked + label {
+        input[type="radio"]:checked+label {
             background: #2ECC71;
             border-color: #2ECC71;
             color: #fff;
@@ -163,7 +163,6 @@
 
 <body>
     <div class="container">
-        <h1 id="quizSubject">Matemática</h1>
         <div id="questionContainer"></div>
         <div class="justify-content-center">
             <button id="nextQuestionBtn" class="btn next-btn" onclick="goToNextQuestion()">Próxima Pergunta</button>
@@ -237,8 +236,7 @@
                 },
                 // Continue inserindo as perguntas e justificativas para Português
             ],
-            'Física': [
-                {
+            'Física': [{
                     question: "ENEM (Fácil) Um estudante observa que, ao abrir uma torneira, a água cai verticalmente e, ao se aproximar do chão, os filetes de água se tornam mais finos. Isso ocorre porque:",
                     options: ["a) a pressão atmosférica diminui ao longo da queda.", "b) a velocidade da água aumenta ao longo da queda.", "c) a densidade da água diminui ao longo da queda.", "d) o volume da água aumenta ao longo da queda."],
                     correctAnswer: 1,
@@ -270,8 +268,7 @@
                 },
                 // Continue inserindo as perguntas e justificativas para Física
             ],
-            'Biologia': [
-                {
+            'Biologia': [{
                     question: "QUESTÃO FÁCIL - Considere a situação hipotética de lançamento, em um ecossistema, de umadeterminanete quantidade de gás carbônico, com marcação radioativa nocarbono. Como passar do tempo, esse gás se dispersaria pelo ambiente e seriaincorporado por seres vivos.Considere as seguintes moléculas:I. Moléculas de glicose sintetizadas pelos produtores.II. Moléculas de gás carbônico produzidas pelos consumidores a partir daoxidação da glicose sintetizada pelos produtores.III. Moléculas de amido produzidas como substância de reserva das plantas.IV. Moléculas orgânicas sintetizadas pelos decopositores. Carbono radioativo poderia ser encontrado nas moléculas descritas em",
                     options: ["A-) I, apenas.", "B-) I e II, apenas", "C-) I, II, III e IV", "D-) III e IV, apenas."],
                     correctAnswer: 2,
@@ -303,8 +300,7 @@
                 },
                 // Continue inserindo as perguntas e justificativas para Biologia
             ],
-            'História': [
-                {
+            'História': [{
                     question: "1-Com o surgimento das primeiras cidades – que remontam 12 mil anos atrás – na convivência social e política, começaram a se destacar algumas pessoas, grupos ou famílias em cargos de liderança, surgindo as primeiras instituições políticas, religiosas e administrativas com a função de coordenar os estoques de alimentos, as práticas e cultos religiosos e a defesa da cidade. Com o passar dos anos, esta organização tornou-se mais complexa e assumiu diferentes formas de atuação e modelos políticos. Sobre as formas políticas desenvolvidas no Ocidente ao longo de sua história, assinale a alternativa CORRETA.",
                     options: ["a) O significado da palavra democracia atualmente é o mesmo desde a Grécia antiga;", "b) A democracia ateniense, diferente das democracias modernas, era excludente, pois, mestiços, escravos, mulheres e crianças não eram considerados cidadãos;", "c) A República romana se formou com a ascensão de Júlio Cesar ao cargo de imperador;", "d) A construção da modernidade envolveu mudanças na maneira de pensar as relações de poder e a política. As teorias de Bodin e Hobbes defendiam um governo democrático e participativo;"],
                     correctAnswer: 1,
@@ -336,8 +332,7 @@
                 },
                 // Continue inserindo as perguntas e justificativas para História
             ],
-            'Geografia': [
-                {
+            'Geografia': [{
                     question: "FENÔMENO EL NIÑO SE CONSOLIDA NO OCEANO PACÍFICO EQUATORIAL “O monitoramento das condições oceânicas nos últimos dias em agosto, indica a persistência de anomalias positivas de TSM (Temperatura da Superfície do Mar) na região do Pacífico Equatorial de até 4 ˚C, o que indica o pleno estabelecimento do fenômeno El Niño-Oscilação Sul (ENOS)”. Fonte: http://enos.cptec.inpe.br/ (acessado em 24/08/2015) O título e o parágrafo inicial do artigo do Instituto Nacional de Pesquisas Espaciais (INPE) abordam a consolidação do fenômeno El Niño. Sobre ele, assinale a alternativa correta.",
                     options: ["A-) consolidação do fenômeno El Niño e sua atuação até fins do verão 2015-2016 provocará no Brasil alterações no comportamento pluviométrico com ausência de chuvas nas regiões Norte, Nordeste, Sudeste, Sul e Centro-Oeste.", "B) Este é um fenômeno em que a interação atmosfera-oceano desaparece, proporcionando padrões normais da Temperatura da Superfície do Mar (TSM) e dos ventos alísios entre a costa brasileira e o litoral africano.", "C) El Niño representa um fenômeno oceânico-atmosférico que se caracteriza por um esfriamento anormal nas águas superficiais do Oceano Pacífico Tropical, com reflexos em várias regiões do mundo, impactadas com longas estiagens.", "D) El Niño é um fenômeno atmosférico-oceânico caracterizado por um aquecimento anormal das águas superficiais no oceano Pacífico Tropical que pode afetar o clima regional e global, mudando os padrões de vento em escala mundial e afetando, assim, os regimes de chuva em regiões tropicais e de latitudes médias."],
                     correctAnswer: 2,
@@ -369,8 +364,7 @@
                 },
                 // Continue inserindo as perguntas e justificativas para Geografia
             ],
-            'Filosofia': [
-                {
+            'Filosofia': [{
                     question: "1. (Enem/2017) Uma conversação de tal natureza transforma o ouvinte; o contato de Sócrates paralisa e embaraça; leva a refletir sobre si mesmo, a imprimir à atenção uma direção incomum: os temperamentais, como Alcibíades sabem que encontrarão junto dele todo o bem de que são capazes, mas fogem porque receiam essa influência poderosa, que os leva a se censurarem. Sobretudo a esses jovens, muitos quase crianças, que ele tenta imprimir sua orientação.BREHIER, E. História da filosofia. São Paulo: Mestre Jou, 1977.O texto evidencia características do modo de vida socrático, que se baseava na",
                     options: ["a) Contemplação da tradição mítica.", "b) Sustentação do método dialético.", "c) Relativização do saber verdadeiro.", "d) Valorização da argumentação retórica."],
                     correctAnswer: 1,
@@ -402,70 +396,68 @@
                 },
                 // Continue inserindo as perguntas e justificativas para Sociologia
             ],
-            'Artes': [
-    {
-        question: "A Semana de Arte Moderna, realizada em 1922, marcou uma ruptura significativa com os padrões artísticos da época. Qual foi um dos principais objetivos desse movimento?",
-        options: [
-            "Valorizar o academicismo clássico",
-            "Resgatar o estilo barroco",
-            "Buscar uma identidade artística brasileira",
-            "Introduzir o realismo francês no Brasil"
-        ],
-        correctAnswer: 2,
-        justification: "A Semana de Arte Moderna teve como um de seus principais objetivos a busca por uma identidade artística genuinamente brasileira, rompendo com as influências europeias predominantes na época."
-    },
-    {
-        question: "Qual movimento artístico utilizou figuras geométricas e formas abstratas como meio de expressar ideias e emoções?",
-        options: [
-            "Surrealismo",
-            "Cubismo",
-            "Impressionismo",
-            "Renascimento"
-        ],
-        correctAnswer: 1,
-        justification: "O cubismo, representado por artistas como Pablo Picasso e Georges Braque, utilizou figuras geométricas e formas abstratas para representar diferentes perspectivas simultâneas de objetos."
-    },
-    {
-        question: "A técnica de 'sfumato', usada por Leonardo da Vinci, é caracterizada por:",
-        options: [
-            "Traços nítidos e bem definidos",
-            "Cores intensas e contrastantes",
-            "Contornos suaves e transições graduais de luz e sombra",
-            "Linhas retas e formas geométricas precisas"
-        ],
-        correctAnswer: 2,
-        justification: "O 'sfumato' é uma técnica que utiliza contornos suaves e transições graduais entre luz e sombra, criando um efeito esfumaçado, como visto na obra 'Mona Lisa'."
-    },
-    {
-        question: "O uso de colagens, materiais não convencionais e elementos tridimensionais caracteriza qual dos movimentos artísticos abaixo?",
-        options: [
-            "Dadaísmo",
-            "Impressionismo",
-            "Barroco",
-            "Neoclassicismo"
-        ],
-        correctAnswer: 0,
-        justification: "O dadaísmo desafiou as convenções artísticas tradicionais, utilizando colagens e materiais não convencionais para provocar reflexões sobre a arte e a sociedade."
-    },
-    {
-        question: "Na música, o termo 'polifonia' refere-se a:",
-        options: [
-            "A execução de várias melodias simultâneas",
-            "O uso de apenas um instrumento em uma composição",
-            "A técnica de improvisação com instrumentos de sopro",
-            "A harmonia entre diferentes vozes em uma ópera"
-        ],
-        correctAnswer: 0,
-        justification: "Polifonia é a sobreposição de várias melodias simultâneas, cada uma com sua linha independente, muito comum na música renascentista e barroca."
-    }
+            'Artes': [{
+                    question: "A Semana de Arte Moderna, realizada em 1922, marcou uma ruptura significativa com os padrões artísticos da época. Qual foi um dos principais objetivos desse movimento?",
+                    options: [
+                        "Valorizar o academicismo clássico",
+                        "Resgatar o estilo barroco",
+                        "Buscar uma identidade artística brasileira",
+                        "Introduzir o realismo francês no Brasil"
+                    ],
+                    correctAnswer: 2,
+                    justification: "A Semana de Arte Moderna teve como um de seus principais objetivos a busca por uma identidade artística genuinamente brasileira, rompendo com as influências europeias predominantes na época."
+                },
+                {
+                    question: "Qual movimento artístico utilizou figuras geométricas e formas abstratas como meio de expressar ideias e emoções?",
+                    options: [
+                        "Surrealismo",
+                        "Cubismo",
+                        "Impressionismo",
+                        "Renascimento"
+                    ],
+                    correctAnswer: 1,
+                    justification: "O cubismo, representado por artistas como Pablo Picasso e Georges Braque, utilizou figuras geométricas e formas abstratas para representar diferentes perspectivas simultâneas de objetos."
+                },
+                {
+                    question: "A técnica de 'sfumato', usada por Leonardo da Vinci, é caracterizada por:",
+                    options: [
+                        "Traços nítidos e bem definidos",
+                        "Cores intensas e contrastantes",
+                        "Contornos suaves e transições graduais de luz e sombra",
+                        "Linhas retas e formas geométricas precisas"
+                    ],
+                    correctAnswer: 2,
+                    justification: "O 'sfumato' é uma técnica que utiliza contornos suaves e transições graduais entre luz e sombra, criando um efeito esfumaçado, como visto na obra 'Mona Lisa'."
+                },
+                {
+                    question: "O uso de colagens, materiais não convencionais e elementos tridimensionais caracteriza qual dos movimentos artísticos abaixo?",
+                    options: [
+                        "Dadaísmo",
+                        "Impressionismo",
+                        "Barroco",
+                        "Neoclassicismo"
+                    ],
+                    correctAnswer: 0,
+                    justification: "O dadaísmo desafiou as convenções artísticas tradicionais, utilizando colagens e materiais não convencionais para provocar reflexões sobre a arte e a sociedade."
+                },
+                {
+                    question: "Na música, o termo 'polifonia' refere-se a:",
+                    options: [
+                        "A execução de várias melodias simultâneas",
+                        "O uso de apenas um instrumento em uma composição",
+                        "A técnica de improvisação com instrumentos de sopro",
+                        "A harmonia entre diferentes vozes em uma ópera"
+                    ],
+                    correctAnswer: 0,
+                    justification: "Polifonia é a sobreposição de várias melodias simultâneas, cada uma com sua linha independente, muito comum na música renascentista e barroca."
+                }
                 // Continue inserindo as perguntas e justificativas para Artes
             ],
-            'Sociologia': [
-                {
+            'Sociologia': [{
                     question: "1. (Enem/2017) Art. 231. São reconhecidos aos índios sua organização social, costumes, línguas, crenças e tradições, e os direitos originários sobre as terras que tradicionalmente ocupam, competindo à União demarcá-las, proteger e fazer respeitar todos os seus bens. A persistência das reivindicações relativas à aplicação desse preceito normativo tem em vista a vinculação histórica fundamental entre",
                     options: ["A) etnia e miscigenação racial.", "B) sociedade e igualdade jurídica.", "C) espaço e sobrevivência cultural.", "D) progresso e educação ambiental."],
                     correctAnswer: 2,
-                    justification: "Alternativa correta: C) espaço e sobrevivência cultural.No trecho da Constituição, o direito ao território (espaço) é apresentado como sendo necessário para a sobrevivência cultural dos povos indígenas.A perda do direito ao território é compreendida como um risco para a “organização social, costumes, línguas, crenças e tradições” específicos dos distintos grupos.A proteção da cultura das diversas etnias exige a proteção de seu território. A extinção dos laços com a terra de origem pode causar a perda de costumes e traços que fundamentam a cultura desses grupos indígenas."  
+                    justification: "Alternativa correta: C) espaço e sobrevivência cultural.No trecho da Constituição, o direito ao território (espaço) é apresentado como sendo necessário para a sobrevivência cultural dos povos indígenas.A perda do direito ao território é compreendida como um risco para a “organização social, costumes, línguas, crenças e tradições” específicos dos distintos grupos.A proteção da cultura das diversas etnias exige a proteção de seu território. A extinção dos laços com a terra de origem pode causar a perda de costumes e traços que fundamentam a cultura desses grupos indígenas."
                 },
                 {
                     question: "2. (Enem/2017) A participação da mulher no processo de decisão política ainda é extremamente limitada em praticamente todos os países, independentemente do regime econômico e social e da estrutura institucional vigente em cada um deles. É fato público e notório, além de empiricamente comprovado, que as mulheres estão em geral sub-representadas nos órgãos do poder, pois a proporção não corresponde jamais ao peso relativo dessa parte da população TABAK, F. Mulheres públicas: participação políticas e poder. Rio de Janeiro: Letra Capital, 2002.No âmbito do Poder Legislativo brasileiro, a tentativa de reverter esse quadro de sub-representação tem envolvido a implementação, pelo Estado, de",
@@ -491,77 +483,104 @@
                     correctAnswer: 3,
                     justification: "Alternativa correta: D) racionalidade de caráter pragmático.Os ideais iluministas trazem consigo a racionalidade e a Razão como força revolucionária ou de negação à perspectiva medieval de submeter a razão à fé.O pensador inglês Jeremy Bentham (1748-1832), defensor do utilitarismo, propõe que a racionalidade esteja ancorada em sua relação com a prática e a utilidade, reforçando o caráter pragmático da razão."
                 },
-                
+
                 // Continue inserindo as perguntas e justificativas para Filosofia
             ]
         };
 
-      
+
         var currentQuestionIndex = 0;
-        var subject = 'Matemática';
+        var selectedQuestions = [];
         var selectedAnswers = [];
         var score = 0;
 
-        // Exibir pergunta e opções
-        function displayQuestion(index) {
-            var questionContainer = document.getElementById('questionContainer');
-            var questionObj = questionsData[subject][index];
+        // Função para iniciar o quiz
+        function startQuiz() {
+            // Obtém a matéria e a quantidade de perguntas a partir dos parâmetros da URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var subject = urlParams.get('subject');
+            var numberOfQuestions = parseInt(urlParams.get('numQuestions'));
 
-            questionContainer.innerHTML = `
-                <div class="question"><strong>${index + 1}. ${questionObj.question}</strong></div>
-                <div class="options-container">
-                    ${questionObj.options.map((option, idx) => `
-                        <input type="radio" id="option${index}_${idx}" name="question${index}" value="${idx}">
-                        <label for="option${index}_${idx}">${option}</label>
-                    `).join('')}
-                </div>
-            `;
+            // Reseta as variáveis
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswers = [];
 
-            document.getElementById('nextQuestionBtn').style.display = (index === questionsData[subject].length - 1) ? 'none' : 'inline-block';
-            document.getElementById('concludeQuizBtn').style.display = (index === questionsData[subject].length - 1) ? 'inline-block' : 'none';
+            // Seleciona as perguntas baseadas na matéria e quantidade escolhidas
+            selectedQuestions = questionsData[subject].slice(0, numberOfQuestions);
+
+            // Exibe a primeira pergunta
+            displayQuestion(currentQuestionIndex);
         }
 
+        // Função para exibir a pergunta
+        function displayQuestion(index) {
+            var questionContainer = document.getElementById('questionContainer');
+            var questionObj = selectedQuestions[index];
+
+            if (questionObj) {
+                questionContainer.innerHTML = `
+            <div class="question"><strong>${index + 1}. ${questionObj.question}</strong></div>
+            <div class="options-container">
+                ${questionObj.options.map((option, idx) => `
+                    <input type="radio" id="option${index}_${idx}" name="question${index}" value="${idx}">
+                    <label for="option${index}_${idx}">${option}</label>
+                `).join('')}
+            </div>
+        `;
+
+                // Mostra os botões de navegação
+                document.getElementById('nextQuestionBtn').style.display = (index === selectedQuestions.length - 1) ? 'none' : 'inline-block';
+                document.getElementById('concludeQuizBtn').style.display = (index === selectedQuestions.length - 1) ? 'inline-block' : 'none';
+            } else {
+                questionContainer.innerHTML = '<p>Fim do quiz!</p>';
+            }
+        }
+
+        // Função para ir à próxima pergunta
         function goToNextQuestion() {
             if (!document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked')) {
                 alert("Selecione uma resposta.");
                 return;
             }
 
+            // Salva a resposta selecionada
             selectedAnswers[currentQuestionIndex] = parseInt(document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked').value);
             currentQuestionIndex++;
             displayQuestion(currentQuestionIndex);
         }
 
-        // Concluir o quiz e exibir resultados
+        // Função para concluir o quiz
         function concludeQuiz() {
-            for (let i = 0; i < questionsData[subject].length; i++) {
-                if (selectedAnswers[i] === questionsData[subject][i].correctAnswer) {
+            for (let i = 0; i < selectedQuestions.length; i++) {
+                if (selectedAnswers[i] === selectedQuestions[i].correctAnswer) {
                     score++;
                 }
             }
             document.getElementById('questionContainer').innerHTML = `
-                <h3>Você acertou ${score} de ${questionsData[subject].length} perguntas.</h3>
-                ${questionsData[subject].map((q, i) => `
-                    <div class="question"><strong>${i + 1}. ${q.question}</strong></div>
-                    <p class="${selectedAnswers[i] === q.correctAnswer ? 'correct' : 'incorrect'}">
-                        ${selectedAnswers[i] === q.correctAnswer ? 'Correto' : 'Incorreto'}
-                    </p>
-                    <p>Resposta correta: ${q.options[q.correctAnswer]}</p>
-                    <p class="justification">Justificativa: ${q.justification}</p>
-                `).join('')}
-            `;
+        <h3>Você acertou ${score} de ${selectedQuestions.length} perguntas.</h3>
+        ${selectedQuestions.map((q, i) => `
+            <div class="question"><strong>${i + 1}. ${q.question}</strong></div>
+            <p class="${selectedAnswers[i] === q.correctAnswer ? 'correct' : 'incorrect'}">
+                ${selectedAnswers[i] === q.correctAnswer ? 'Correto' : 'Incorreto'}
+            </p>
+            <p>Resposta correta: ${q.options[q.correctAnswer]}</p>
+            <p class="justification">Justificativa: ${q.justification}</p>
+        `).join('')}
+    `;
             document.getElementById('concludeQuizBtn').style.display = "none";
             document.getElementById('backBtn').style.display = "inline-block";
         }
 
+        // Função para voltar
         function goBack() {
             window.history.back();
         }
 
         // Inicialização ao carregar a página
-        window.onload = function () {
-            displayQuestion(currentQuestionIndex);
-        }
+        window.onload = function() {
+            startQuiz();
+        };
     </script>
 </body>
 

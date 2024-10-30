@@ -80,19 +80,24 @@
 
     // Função para selecionar a matéria
     function selectSubject(subject) {
-        selectedSubject = subject;
-        document.getElementById('questionSelectContainer').style.display = 'block';
-        document.getElementById('selectedSubject').innerText = 'Matéria Selecionada: ' + subject;
-
-        // Esconder o botão de "Realizar Simulado"
-        document.getElementById('realizarSimuladoBtn').style.display = 'none';
+        selectedSubject = subject; // Define a matéria selecionada
+        document.getElementById('questionSelectContainer').style.display = 'block'; // Mostra o seletor de questões
+        document.getElementById('selectedSubject').innerText = 'Matéria Selecionada: ' + subject; // Atualiza o texto da matéria
     }
 
     // Função para iniciar o quiz e enviar as escolhas para a nova página
     function startQuiz() {
-        var numQuestions = document.getElementById('questionNumber').value;
+        var numQuestions = document.getElementById('questionNumber').value; // Pega a quantidade de perguntas selecionadas
+        
+        if (!selectedSubject) {
+            alert('Por favor, selecione uma matéria primeiro.');
+            return;
+        }
+
+        // Redireciona para o quiz com as escolhas
         window.location.href = "quiz.php?subject=" + encodeURIComponent(selectedSubject) + "&numQuestions=" + numQuestions;
     }
 </script>
+
 </body>
 </html>
