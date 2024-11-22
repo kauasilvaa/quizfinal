@@ -13,10 +13,10 @@ if (
     isset($_POST['senha'])
 ) {
     $usersController->createUser(
-        $_POST['nome'], 
-        $_POST['nomedeusuario'], 
-        $_POST['email'], 
-        $_POST['senha'], 
+        $_POST['nome'],
+        $_POST['nomedeusuario'],
+        $_POST['email'],
+        $_POST['senha'],
         $_POST['nivel_acesso'], // Passando o nível de acesso para o controlador
     );
 
@@ -27,12 +27,12 @@ if (
 // Processo de login
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
     $resultado = $usersController->fazerlogin($_POST['nomedeusuario'], $_POST['senha']);
-    
+
     if ($resultado) {
-        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessãoo
+        $_SESSION['id_usuario'] = $resultado['id_usuario']; // Salva o ID do usuário na sessão
         $_SESSION['nome'] = $resultado['nome']; // Salva o nome do usuário
         $_SESSION['nivel_acesso'] = $resultado['nivel_acesso']; // Salva o nível de acesso na sessão
-        
+
         // Redireciona com base no nível de acesso
         if ($_SESSION['nivel_acesso'] == 1) {
             header('Location: quizz/adm/admin_dashboard.php'); // Página de administrador
@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
         exit(); // Finaliza a execução
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -67,9 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
             <div class="nav-logo">
                 <img src="quizz/img/logo.jfif" class="logo">
             </div>
-            <div class="nav-menu" id="navMenu">
-                
-            </div>
+            <div class="nav-menu" id="navMenu"></div>
             <div class="nav-button">
                 <button class="btn white-btn" id="loginBtn" onclick="login()">Entrar</button>
                 <button class="btn" id="registerBtn" onclick="register()">Cadastrar</button>
@@ -79,10 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
             </div>
         </nav>
 
-        <!----------------------------- Form box ----------------------------------->
-        <div class="form-box">
+        <!-- Botão do Tutorial (posicionado na parte superior) -->
+        <div class="tutorial-btn">
+            <a href="tutorial.php">
+                <button class="btn tutorial-btn">Ver Tutorial</button>
+            </a>
+        </div>
 
-            <!------------------- login form --------------------------->
+
+        <div class="form-box">
             <div class="login-container" id="login">
                 <form method="post">
                     <div class="top">
@@ -104,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
                 </form>
             </div>
 
-            <!------------------- registration form --------------------------->
             <form method="post" class="register-container" id="register">
                 <div class="top">
                     <span>Já tem uma Conta? <a href="#" onclick="login()">Login</a></span>
@@ -128,20 +129,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
                     <input type="password" class="input-field" name="senha" placeholder="Senha" required>
                     <i class="bx bx-lock-alt"></i>
                 </div>
-
-                <!-- Campo para selecionar o nível de acesso -->
-                <div class="input-box">
-        
-                    </select>
-        
-                </div>
-
                 <div class="input-box">
                     <input type="submit" class="submit" value="Registrar">
                 </div>
             </form>
             <div class="two-col"></div>
-
         </div>
     </div>
 
@@ -155,9 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
                 i.className = "nav-menu";
             }
         }
-    </script>
 
-    <script>
         var a = document.getElementById("loginBtn");
         var b = document.getElementById("registerBtn");
         var x = document.getElementById("login");
@@ -181,7 +171,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Entrar'])) {
             y.style.opacity = 1;
         }
     </script>
-
 </body>
 
 </html>

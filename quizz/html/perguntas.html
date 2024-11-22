@@ -1,114 +1,159 @@
-    <!DOCTYPE html>
-    <html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quiz</title>
-        <link rel="stylesheet" href="../css/perguntas.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="../css/perguntas.css">
+</head>
 
-    <body>
-        <div class="quiz-container">
-            <h1>Quiz</h1>
-            <div id="quiz"></div>
-            <button id="submit">Enviar Respostas</button>
-            <div id="results"></div>
-        </div>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <div id="quiz"></div>
+        <button id="submit">Enviar Respostas</button>
+        <div id="results"></div>
+    </div>
 
-        <script>
-            let quizData = [];
-            let currentQuiz = 0;
-            let userAnswers = [];
-            let score = 0;
+    <script>
+        let quizData = [];
+        let currentQuiz = 0;
+        let userAnswers = [];
+        let score = 0;
 
-            // Função para carregar as perguntas do servidor
-            function loadQuizData() {
-                fetch('http://localhost/quizfinal/quizfinal/quizz/adm/getQuestions.php') // Certifique-se de que o caminho está correto
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length === 0) {
-                            document.getElementById('quiz').innerHTML = "<p>Não há perguntas cadastradas no momento.</p>";
-                            document.getElementById('submit').style.display = 'none'; // Esconde o botão se não houver perguntas
-                        } else {
-                            quizData = data;
-                            loadQuiz();
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro ao carregar as perguntas:', error);
-                        document.getElementById('quiz').innerHTML = "<p>Erro ao carregar perguntas. Tente novamente mais tarde.</p>";
-                    });
-            }
-
-            // Função para carregar uma pergunta do quiz
-            function loadQuiz() {
-                const currentQuizData = quizData[currentQuiz];
-                document.getElementById('quiz').innerHTML = `
-                    <div class="question">${currentQuizData.titulo_pergunta}</div>
-                    <label><input type="radio" name="answer" value="1"> ${currentQuizData.opcao1}</label><br>
-                    <label><input type="radio" name="answer" value="2"> ${currentQuizData.opcao2}</label><br>
-                    <label><input type="radio" name="answer" value="3"> ${currentQuizData.opcao3}</label><br>
-                    <label><input type="radio" name="answer" value="4"> ${currentQuizData.opcao4}</label>
-                `;
-            }
-
-            // Função para processar os resultados
-            function processResults() {
-                let resultsEl = document.getElementById('results');
-                const percentage = Math.round((score / quizData.length) * 100);
-
-                resultsEl.innerHTML = `
-                    <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
-                    <h3>Sua nota: ${percentage}%</h3>
-                    <ul id="answers-summary"></ul>
-                `;
-
-                const answersSummary = document.getElementById('answers-summary');
-
-                quizData.forEach((data, index) => {
-                    const userAnswer = userAnswers[index];
-                    const correctAnswer = data.resposta_correta;
-                    const isCorrect = userAnswer === correctAnswer;
-
-                    answersSummary.innerHTML += `
-                        <li>
-                            <strong>Pergunta ${index + 1}:</strong> ${data.titulo_pergunta}<br>
-                            <strong>Sua resposta:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data['opcao' + userAnswer]}</span><br>
-                            <strong>Resposta correta:</strong> ${data['opcao' + correctAnswer]}<br>
-                        </li>
-                    `;
+        // Função para carregar as perguntas do servidor
+        function loadQuizData() {
+            fetch('http://localhost/quizfinal/quizfinal/quizz/adm/getQuestions.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        document.getElementById('quiz').innerHTML = "<p>Não há perguntas cadastradas no momento.</p>";
+                        document.getElementById('submit').style.display = 'none'; // Esconde o botão se não houver perguntas
+                    } else {
+                        quizData = data;
+                        loadQuiz();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar as perguntas:', error);
+                    document.getElementById('quiz').innerHTML = "<p>Erro ao carregar perguntas. Tente novamente mais tarde.</p>";
                 });
-            }
+        }
 
-            // Evento ao clicar no botão "Enviar Respostas"
-            document.getElementById('submit').addEventListener('click', () => {
-                const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        // Função para carregar uma pergunta do quiz
+        function loadQuiz() {
+            const currentQuizData = quizData[currentQuiz];
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">${currentQuizData.titulo_pergunta}</div>
+                <label><input type="radio" name="answer" value="1"> ${currentQuizData.opcao1}</label><br>
+                <label><input type="radio" name="answer" value="2"> ${currentQuizData.opcao2}</label><br>
+                <label><input type="radio" name="answer" value="3"> ${currentQuizData.opcao3}</label><br>
+                <label><input type="radio" name="answer" value="4"> ${currentQuizData.opcao4}</label>
+            `;
+        }
 
-                if (!selectedAnswer) {
-                    alert("Por favor, selecione uma resposta.");
-                    return;
-                }
+        // Função para processar os resultados
+        function processResults() {
+            let resultsEl = document.getElementById('results');
+            const percentage = Math.round((score / quizData.length) * 100);
 
-                userAnswers.push(selectedAnswer.value);
+            resultsEl.innerHTML = `
+                <h2>Você acertou ${score} de ${quizData.length} perguntas.</h2>
+                <h3>Sua nota: ${percentage}%</h3>
+                <ul id="answers-summary"></ul>
+            `;
 
-                if (selectedAnswer.value === quizData[currentQuiz].resposta_correta) {
-                    score++;
-                }
+            const answersSummary = document.getElementById('answers-summary');
 
-                currentQuiz++;
+            quizData.forEach((data, index) => {
+                const userAnswer = userAnswers[index];
+                const correctAnswer = data.resposta_correta;
 
-                if (currentQuiz < quizData.length) {
-                    loadQuiz(); // Carregar a próxima pergunta
-                } else {
-                    processResults(); // Processar resultados no final
-                    document.getElementById('submit').style.display = 'none'; // Esconder o botão ao final
+                console.log(`Pergunta ${index + 1}: Sua resposta é ${userAnswer}, Resposta correta é ${correctAnswer}`);
+
+                // Garantir que a comparação seja feita com valores consistentes (ambos como strings ou ambos como números)
+                const isCorrect = String(userAnswer) === String(correctAnswer);
+
+                const justificativa = data.conclusao ? data.conclusao : "Nenhuma justificativa disponível.";
+
+                answersSummary.innerHTML += `
+                    <li>
+                        <strong>Pergunta ${index + 1}:</strong> ${data.titulo_pergunta}<br>
+                        <strong>Sua resposta:</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">${data['opcao' + userAnswer]}</span><br>
+                        <strong>Resposta correta:</strong> ${data['opcao' + correctAnswer]}<br>
+                        <strong>Justificativa:</strong> ${justificativa}<br>
+                    </li>
+                `;
+            });
+
+            // Adicionar o botão para reiniciar o quiz
+            resultsEl.innerHTML += `<button id="restart">Recomeçar</button>`;
+
+            // Adicionar o evento para reiniciar o quiz
+            const restartBtn = document.getElementById('restart');
+            restartBtn.addEventListener('click', restartQuiz);
+        }
+
+        // Função para reiniciar o quiz
+        function restartQuiz() {
+            currentQuiz = 0;
+            score = 0;
+            userAnswers = [];
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('submit').style.display = 'block';
+            loadQuiz();
+        }
+
+        // Função para obter a resposta selecionada
+        function getSelected() {
+            const answers = document.getElementsByName('answer');
+            let selectedAnswer = null;
+
+            answers.forEach(answer => {
+                if (answer.checked) {
+                    selectedAnswer = answer.value;
                 }
             });
 
-            // Carregar as perguntas ao iniciar
-            loadQuizData();
-        </script>
-    </body>
+            return selectedAnswer;
+        }
 
-    </html>
+        // Evento ao clicar no botão "Enviar Respostas"
+        document.getElementById('submit').addEventListener('click', () => {
+            const selectedAnswer = getSelected();
+
+            if (!selectedAnswer) {
+                alert("Por favor, selecione uma resposta.");
+                return;
+            }
+
+            userAnswers.push(selectedAnswer);
+
+            // Adicionando log para debug
+            console.log(`Pergunta ${currentQuiz + 1}: Resposta selecionada: ${selectedAnswer}`);
+
+            // Se a resposta estiver correta, incrementa a pontuação
+            if (String(selectedAnswer) === String(quizData[currentQuiz].resposta_correta)) {
+                score++;
+                console.log(`Resposta correta! Pontuação atual: ${score}`);
+            } else {
+                console.log(`Resposta incorreta. Pontuação atual: ${score}`);
+            }
+
+            currentQuiz++;
+
+            if (currentQuiz < quizData.length) {
+                loadQuiz(); // Carregar a próxima pergunta
+            } else {
+                processResults(); // Processar resultados no final
+                document.getElementById('submit').style.display = 'none'; // Esconder o botão ao final
+            }
+        });
+
+        // Carregar as perguntas ao iniciar
+        loadQuizData();
+    </script>
+</body>
+
+</html>

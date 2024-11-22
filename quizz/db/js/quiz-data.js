@@ -71,14 +71,12 @@ function processResults() {
     });
 
     // Adicionar o botão para reiniciar o quiz
-    resultsEl.innerHTML += <button id="restart">Recomeçar</button>;
+    resultsEl.innerHTML += `<button id="restart">Recomeçar</button>`;
 
     // Adicionar o evento para reiniciar o quiz
     const restartBtn = document.getElementById('restart');
     restartBtn.addEventListener('click', restartQuiz);
 }
-77
-
 
 // Função para reiniciar o quiz
 function restartQuiz() {

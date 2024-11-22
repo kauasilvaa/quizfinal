@@ -85,6 +85,17 @@
             color: #fff;
         }
 
+        .save-btn {
+            background-color: #27AE60;
+            color: #fff;
+            display: none;
+            margin-left: 10px;
+        }
+
+        .save-btn:hover {
+            background-color: #2ECC71;
+        }
+
         .btn {
             border-radius: 25px;
             font-size: 1.1rem;
@@ -161,13 +172,13 @@
     </style>
 </head>
 
-<body>
-    <div class="container">
+<div class="container">
         <div id="questionContainer"></div>
         <div class="justify-content-center">
             <button id="nextQuestionBtn" class="btn next-btn" onclick="goToNextQuestion()">Próxima Pergunta</button>
             <button id="concludeQuizBtn" class="btn conclude-btn" onclick="concludeQuiz()">Concluir</button>
             <button id="backBtn" class="btn back-btn" onclick="goBack()">Voltar</button>
+            <button id="saveActivityBtn" class="btn save-btn" onclick="saveActivity()">Salvar Atividade</button>
         </div>
     </div>
 
@@ -240,31 +251,31 @@
                     question: "ENEM (Fácil) Um estudante observa que, ao abrir uma torneira, a água cai verticalmente e, ao se aproximar do chão, os filetes de água se tornam mais finos. Isso ocorre porque:",
                     options: ["a) a pressão atmosférica diminui ao longo da queda.", "b) a velocidade da água aumenta ao longo da queda.", "c) a densidade da água diminui ao longo da queda.", "d) o volume da água aumenta ao longo da queda."],
                     correctAnswer: 1,
-                    justification: "Justificativa para a resposta correta da pergunta 1 de Física."
+                    justification: "A resposta correta é 'b) a velocidade da água aumenta ao longo da queda'. À medida que a água cai, sua velocidade aumenta devido à aceleração gravitacional. Esse aumento na velocidade resulta em um fluxo mais rápido e, consequentemente, um filete de água mais fino, uma vez que o mesmo volume de água ocupa menos espaço devido à maior velocidade."
                 },
                 {
                     question: "ENEM (Fácil) - Um carro desloca-se em uma estrada retilínea com velocidade constante de 20 m/s. Quanto tempo o carro levará para percorrer uma distância de 200 metros?",
                     options: ["a) 10s", "b) 15s", "c) 20s", "d) 30s"],
                     correctAnswer: 2,
-                    justification: "Justificativa para a resposta correta da pergunta 1 de Física."
+                    justification: "A resposta correta é 'c) 20s'. Para calcular o tempo, usamos a fórmula tempo = distância / velocidade. Substituindo os valores dados na questão, temos: 200 m / 20 m/s = 10 s."
                 },
                 {
                     question: "Nível Médio VUNESP - Uma pessoa está parada na calçada observando um caminhão que se move em linha reta com velocidade constante de 36 km/h. Em determinado momento, o caminhão buzina emitindo um som com frequência de 440 Hz. Sabendo que a velocidade do som no ar é de 340 m/s, a frequência do som percebida pela pessoa, devido ao efeito Doppler, será aproximadamente:",
                     options: ["a) 410 Hz", "b)  470 Hz", "c) 430 Hz", "d) 440 Hz"],
                     correctAnswer: 2,
-                    justification: "Justificativa para a resposta correta da pergunta 1 de Física."
+                    justification: "A resposta correta é 'b) 470 Hz'. O efeito Doppler explica que, quando uma fonte sonora se aproxima de um observador, a frequência percebida aumenta. Neste caso, como o caminhão se aproxima, a frequência percebida será ligeiramente superior a 440 Hz, resultando em 470 Hz aproximadamente."
                 },
                 {
                     question: "FUVEST (Difícil) - Um bloco de massa 2 kg é puxado por uma força F de 10 N sobre uma superfície horizontal sem atrito. Sabendo que o bloco parte do repouso e que a força F atua ao longo de uma distância de 5 metros, a velocidade final do bloco será:",
                     options: ["a) 5 m/s", "b) 3 m/s", "c) 7 m/s", "d) 10 m/s"],
                     correctAnswer: 0,
-                    justification: "Justificativa para a resposta correta da pergunta 1 de Física."
+                    justification: "A resposta correta é 'a) 5 m/s'. Usando o teorema do trabalho e energia, o trabalho realizado pela força é igual à variação da energia cinética. Como a força F atua ao longo de uma distância de 5 metros, podemos calcular a velocidade final do bloco considerando que trabalho = F x d = energia cinética = (1/2) m v^2."
                 },
                 {
                     question: "FUVEST (Difícil) - Uma mola ideal, de constante elástica 𝑘=200 𝑁/𝑚k=200N/m, é comprimida em 10 cm. Em seguida, um objeto de massa 1 kg é colocado contra a mola comprimida e, ao ser liberado, o objeto é lançado horizontalmente. Desconsiderando atritos, determine a velocidade de lançamento do objeto.",
                     options: ["a) 1 m/s", "b) 2 m/s", "c) 3 m/s", "d) 4 m/s"],
                     correctAnswer: 1,
-                    justification: "Justificativa para a resposta correta da pergunta 1 de Física."
+                    justification: "A resposta correta é 'b) 2 m/s'. Pela conservação de energia, a energia potencial elástica da mola comprimida é convertida em energia cinética do objeto no momento do lançamento. Essa transformação permite calcular a velocidade de lançamento."
                 },
                 // Continue inserindo as perguntas e justificativas para Física
             ],
@@ -272,31 +283,31 @@
                     question: "QUESTÃO FÁCIL - Considere a situação hipotética de lançamento, em um ecossistema, de umadeterminanete quantidade de gás carbônico, com marcação radioativa nocarbono. Como passar do tempo, esse gás se dispersaria pelo ambiente e seriaincorporado por seres vivos.Considere as seguintes moléculas:I. Moléculas de glicose sintetizadas pelos produtores.II. Moléculas de gás carbônico produzidas pelos consumidores a partir daoxidação da glicose sintetizada pelos produtores.III. Moléculas de amido produzidas como substância de reserva das plantas.IV. Moléculas orgânicas sintetizadas pelos decopositores. Carbono radioativo poderia ser encontrado nas moléculas descritas em",
                     options: ["A-) I, apenas.", "B-) I e II, apenas", "C-) I, II, III e IV", "D-) III e IV, apenas."],
                     correctAnswer: 2,
-                    justification: ""
+                    justification: "A resposta correta é 'C) I, II, III e IV'. O carbono radioativo pode ser incorporado ao ecossistema através da fotossíntese realizada pelos produtores e, a partir daí, percorrerá toda a cadeia alimentar, passando para consumidores e decompositores."
                 },
                 {
                     question: "QUESTÃO MÉDIA - Na história evolutiva dos metazoários, o processo digestivo",
                     options: ["A-) é completamente extracelular nos vertebrados, o que os distingue dosdemais grupos de animais.", "B-) passa de completamente intracelular a completamente extracelular, a partir dos nematelmintos", "C-) passa de completamente extracelular a completamente intracelular, a partir dos anelídeos.", "D-) é intracelular, com hidrólise enzimática de moléculas de grande tamanho, a partir dos equinodermas."],
                     correctAnswer: 1,
-                    justification: ""
+                    justification: "A resposta correta é 'B) passa de completamente intracelular a completamente extracelular, a partir dos nematelmintos'. O processo digestivo nos animais evolui de uma digestão intracelular, em animais simples, para uma digestão extracelular em animais mais complexos, iniciando com os nematelmintos."
                 },
                 {
                     question: "QUESTÃO DIFÍCIL - As briófitas, no reino vegetal, e os anfíbios, entre os vertebrados, são considerados os primeiros grupos a conquistar o ambiente terrestre. Comparando-os, é correto afirmar que,",
                     options: ["A-) nos anfíbios e nas briófitas, o sistema vascular é pouco desenvolvido; isso faz com que, nos anfíbios, a temperatura não seja controlada internamente.", "B-) nos anfíbios e nas briófitas, a absorção de água se dá pela epiderme; o transporte de água é feito por difusão, célula por célula, às demais partes do corpo.", "C-) nos anfíbios e nas briófitas, a fecundação ocorre em meio seco; o desenvolvimento dos embriões se dá na água.", "D-) nos anfíbios, o produto imediato da meiose são os gametas; nas briófitas, a meiose origina um indivíduo haploide que posteriormente produz os gametas."],
                     correctAnswer: 3,
-                    justification: ""
+                    justification: "A resposta correta é 'D) nos anfíbios, o produto imediato da meiose são os gametas; nas briófitas, a meiose origina um indivíduo haploide que posteriormente produz os gametas'. Nos anfíbios, os gametas são produzidos diretamente pela meiose. Nas briófitas, a meiose resulta em esporos, que crescem e formam o gametófito, o qual produz gametas."
                 },
                 {
                     question: "QUESTÃO MÉDIA - Para que a célula possa transportar, para seu interior, o colesterol da circulação sanguínea, é necessária a presença de uma determinada proteína em sua membrana. Existem mutações do gene responsável pela síntese dessa proteína que impedem a sua produção. Quando um homem ou uma mulher possui uma dessas mutações, mesmo tendo também um alelo normal, apresenta Hipercolesterolemia, ou seja, aumento do nível de colesterol no sangue.A hipercolesterolemia devida a essa mutação tem, portanto, herança",
                     options: ["A-) ligada ao X recessiva.", "B-) ligada ao X dominante. ", "C-)  autossômica recessiva.", "D-) autossômica dominante."],
                     correctAnswer: 3,
-                    justification: ""
+                    justification: "A resposta correta é 'D) autossômica dominante'. A hipercolesterolemia hereditária é causada por uma mutação dominante em um gene autossômico, o que significa que basta um alelo mutante para manifestar a condição."
                 },
                 {
                     question: "QUESTÃO FÁCIL - Considere as seguintes comparações entre uma comunidade pioneira e uma comunidade clímax, ambas sujeitas às mesmas condições ambientais, em um processo de sucessão ecológica primária:I. A produtividade primária bruta é maior numa comunidade clímax do que numa comunidade pioneira.II. A produtividade primária líquida é maior numa comunidade pioneira do que numa comunidade clímax.III. A complexidade de nichos é maior numa comunidade pioneira do que numa comunidade clímax.Está correto apenas o que se afirma em",
                     options: ["A-) I e II.", "B-) I e III", "C-) III.", "D-) II"],
                     correctAnswer: 0,
-                    justification: ""
+                    justification: "A resposta correta é 'A) I e II'. Em uma sucessão ecológica, a produtividade primária líquida é geralmente maior em uma comunidade pioneira, pois o consumo de energia pelos organismos é menor, enquanto a produtividade primária bruta tende a ser maior em uma comunidade clímax devido à estabilização e ao desenvolvimento completo do ecossistema."
                 },
                 // Continue inserindo as perguntas e justificativas para Biologia
             ],
@@ -488,38 +499,33 @@
             ]
         };
 
-
         var currentQuestionIndex = 0;
-        var selectedQuestions = [];
-        var selectedAnswers = [];
-        var score = 0;
+var selectedQuestions = [];
+var selectedAnswers = [];
+var score = 0;
+var subject = '';  // Variável para armazenar o nome da matéria
 
-        // Função para iniciar o quiz
-        function startQuiz() {
-            // Obtém a matéria e a quantidade de perguntas a partir dos parâmetros da URL
-            var urlParams = new URLSearchParams(window.location.search);
-            var subject = urlParams.get('subject');
-            var numberOfQuestions = parseInt(urlParams.get('numQuestions'));
+// Função para iniciar o quiz
+function startQuiz() {
+    var urlParams = new URLSearchParams(window.location.search);
+    subject = urlParams.get('subject');  // Captura o parâmetro 'subject' da URL
+    var numberOfQuestions = parseInt(urlParams.get('numQuestions'));
 
-            // Reseta as variáveis
-            currentQuestionIndex = 0;
-            score = 0;
-            selectedAnswers = [];
+    currentQuestionIndex = 0;
+    score = 0;
+    selectedAnswers = [];
+    selectedQuestions = questionsData[subject].slice(0, numberOfQuestions);
 
-            // Seleciona as perguntas baseadas na matéria e quantidade escolhidas
-            selectedQuestions = questionsData[subject].slice(0, numberOfQuestions);
+    displayQuestion(currentQuestionIndex);
+}
 
-            // Exibe a primeira pergunta
-            displayQuestion(currentQuestionIndex);
-        }
+// Função para exibir a pergunta
+function displayQuestion(index) {
+    var questionContainer = document.getElementById('questionContainer');
+    var questionObj = selectedQuestions[index];
 
-        // Função para exibir a pergunta
-        function displayQuestion(index) {
-            var questionContainer = document.getElementById('questionContainer');
-            var questionObj = selectedQuestions[index];
-
-            if (questionObj) {
-                questionContainer.innerHTML = `
+    if (questionObj) {
+        questionContainer.innerHTML = `
             <div class="question"><strong>${index + 1}. ${questionObj.question}</strong></div>
             <div class="options-container">
                 ${questionObj.options.map((option, idx) => `
@@ -529,35 +535,33 @@
             </div>
         `;
 
-                // Mostra os botões de navegação
-                document.getElementById('nextQuestionBtn').style.display = (index === selectedQuestions.length - 1) ? 'none' : 'inline-block';
-                document.getElementById('concludeQuizBtn').style.display = (index === selectedQuestions.length - 1) ? 'inline-block' : 'none';
-            } else {
-                questionContainer.innerHTML = '<p>Fim do quiz!</p>';
-            }
+        document.getElementById('nextQuestionBtn').style.display = (index === selectedQuestions.length - 1) ? 'none' : 'inline-block';
+        document.getElementById('concludeQuizBtn').style.display = (index === selectedQuestions.length - 1) ? 'inline-block' : 'none';
+    } else {
+        questionContainer.innerHTML = '<p>Fim do quiz!</p>';
+    }
+}
+
+// Função para ir à próxima pergunta
+function goToNextQuestion() {
+    if (!document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked')) {
+        alert("Selecione uma resposta.");
+        return;
+    }
+
+    selectedAnswers[currentQuestionIndex] = parseInt(document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked').value);
+    currentQuestionIndex++;
+    displayQuestion(currentQuestionIndex);
+}
+
+// Função para concluir o quiz
+function concludeQuiz() {
+    for (let i = 0; i < selectedQuestions.length; i++) {
+        if (selectedAnswers[i] === selectedQuestions[i].correctAnswer) {
+            score++;
         }
-
-        // Função para ir à próxima pergunta
-        function goToNextQuestion() {
-            if (!document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked')) {
-                alert("Selecione uma resposta.");
-                return;
-            }
-
-            // Salva a resposta selecionada
-            selectedAnswers[currentQuestionIndex] = parseInt(document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked').value);
-            currentQuestionIndex++;
-            displayQuestion(currentQuestionIndex);
-        }
-
-        // Função para concluir o quiz
-        function concludeQuiz() {
-            for (let i = 0; i < selectedQuestions.length; i++) {
-                if (selectedAnswers[i] === selectedQuestions[i].correctAnswer) {
-                    score++;
-                }
-            }
-            document.getElementById('questionContainer').innerHTML = `
+    }
+    document.getElementById('questionContainer').innerHTML = `
         <h3>Você acertou ${score} de ${selectedQuestions.length} perguntas.</h3>
         ${selectedQuestions.map((q, i) => `
             <div class="question"><strong>${i + 1}. ${q.question}</strong></div>
@@ -568,19 +572,44 @@
             <p class="justification">Justificativa: ${q.justification}</p>
         `).join('')}
     `;
-            document.getElementById('concludeQuizBtn').style.display = "none";
-            document.getElementById('backBtn').style.display = "inline-block";
-        }
+    document.getElementById('concludeQuizBtn').style.display = "none";
+    document.getElementById('backBtn').style.display = "inline-block";
+    document.getElementById('saveActivityBtn').style.display = "inline-block";  // Exibe o botão "Salvar Atividade"
+}
 
-        // Função para voltar
-        function goBack() {
-            window.history.back();
-        }
+// Função para voltar
+function goBack() {
+    window.history.back();
+}
 
-        // Inicialização ao carregar a página
-        window.onload = function() {
-            startQuiz();
-        };
+// Função para salvar a atividade
+function saveActivity() {
+    var activityData = {
+        pontuacao: score,
+        total_perguntas: selectedQuestions.length,
+        respostas: JSON.stringify(selectedAnswers),
+        id_quiz: selectedQuestions[0].id, // Supondo que o ID do quiz seja o mesmo para todas as perguntas
+        materia: subject  // Incluindo a matéria na requisição
+    };
+
+    fetch("salvaratividade.php", {
+        method: "POST",
+        body: new URLSearchParams(activityData)
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert("Atividade salva com sucesso!");
+        window.location.href = "atividaderealizada.php";  // Redireciona para a página de atividades realizadas
+    })
+    .catch(error => {
+        console.error("Erro ao salvar atividade:", error);
+    });
+}
+
+// Inicialização ao carregar a página
+window.onload = function() {
+    startQuiz();
+};
     </script>
 </body>
 

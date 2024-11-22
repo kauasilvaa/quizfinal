@@ -45,7 +45,7 @@ body {
 
 /* Caixa do quiz */
 .quiz-container {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgb(255, 255, 255);
     border-radius: 16px;
     padding: 40px;
     width: 400px;
@@ -74,6 +74,7 @@ h2 {
     margin-bottom: 30px;
     color: #3949ab;
 }
+
 /* Estilo do Botão de Filtro */
 .filter-container {
     position: relative;
@@ -104,50 +105,38 @@ h2 {
     font-size: 1.3em;
 }
 
-/* Estilo do menu de filtro com rolagem */
 .filter-menu {
     display: none;
     position: absolute;
-    width: 250px; /* Aumenta a largura para se ajustar melhor ao conteúdo */
-    max-height: 250px; /* Aumenta a altura máxima */
-    overflow-y: auto; /* Adiciona rolagem vertical */
+    width: 100%;
     background-color: #ffffff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
-    border-radius: 10px; /* Bordas mais arredondadas */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     top: 100%;
     left: 0;
     z-index: 1;
-    padding: 5px 0; /* Adiciona um pequeno espaço ao redor dos itens */
-    transition: all 0.3s ease-in-out; /* Transição suave para a visibilidade */
 }
 
-/* Estilo dos itens do menu */
 .filter-menu .filter-item {
     display: block;
-    padding: 15px 20px; /* Aumenta o padding para itens mais espaçados */
-    color: #444; /* Cor mais suave para os itens */
+    padding: 12px;
+    color: #333;
     text-decoration: none;
-    border-bottom: 1px solid #f0f0f0; /* Borda mais suave */
-    transition: background-color 0.3s, padding-left 0.3s; /* Transição suave no hover */
+    border-bottom: 1px solid #000000;
+    transition: background-color 0.3s ease;
 }
 
-/* Remover a borda no último item */
 .filter-menu .filter-item:last-child {
     border-bottom: none;
 }
 
-/* Estilo ao passar o mouse sobre o item */
 .filter-menu .filter-item:hover {
-    background-color: #f9f9f9; /* Cor de fundo mais suave */
-    padding-left: 25px; /* Leve deslocamento para a esquerda ao passar o mouse */
+    background-color: #f0f0f0;
 }
 
-/* Mostrar o menu quando o botão for clicado */
-.filter-container:focus-within .filter-menu, 
 .filter-container:hover .filter-menu {
     display: block;
 }
-''
 
 /* Botões de nível */
 .btn-level {
@@ -204,7 +193,7 @@ input[type="radio"] {
 }
 
 button {
-    background-color: #3f51b5;
+    background-color: #ff5722;
     color: #fff;
     border: none;
     padding: 15px 20px;
@@ -212,15 +201,15 @@ button {
     font-size: 1.2em;
     cursor: pointer;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px #3f51b5;
+    box-shadow: 0px 5px 15px rgba(255, 87, 34, 0.4);
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
 button:hover {
-    background-color: #3f51b5;
-    box-shadow: 0px 7px 20px #3f51b5;
+    background-color: #e64a19;
+    box-shadow: 0px 7px 20px rgba(255, 87, 34, 0.6);
     transform: translateY(-5px); /* Efeito de "flutuar" */
 }
 
@@ -251,7 +240,7 @@ button:hover {
 }
 .top{
     font-size: 20px;
-    color:#0056b3;
+    color: white;
 }
 .ir{
     margin-top: 30px;
@@ -272,7 +261,7 @@ button:hover {
     width: 100%;
     height: 100px;
     line-height: 100px;
-    background: linear-gradient(#0056b3, transparent);
+    background: linear-gradient(rgba(39,39,39, 0.6), transparent);
     z-index: 100;
 }
 .logo {
@@ -283,8 +272,12 @@ button:hover {
     border-radius: 8px; /* Adiciona bordas arredondadas */
     box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
 }
+.table{
+    border:1px solid #000000;
+}
 .nav-menu ul{
     display: flex;
+    align-items: flex-start;
 }
 .nav-menu ul li{
     list-style-type: none;
@@ -300,8 +293,8 @@ button:hover {
     border-bottom: 2px solid #fff;
 }
 .nav-button .btn{
-    width: 150px;
-    height: 60px;
+    width: 130px;
+    height: 40px;
     font-weight: 500;
     background: rgba(255, 255, 255, 0.4);
     border: none;
@@ -322,5 +315,29 @@ button:hover {
     background: rgba(255, 255, 255, 0.5);
 }
 .nav-menu-btn{
-    display: none;
+    display: none;
 }
+.text-box {
+    width: 100%;
+    height: 170px; /* Ajuste conforme o tamanho da área branca */
+    overflow-y: scroll; /* Barra de rolagem apenas no eixo Y */
+    border: 1px solid #ffffff; /* Adiciona uma borda para destacar a área */
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: #ffffff;
+    text-align: left;
+}
+html ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  html ::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: #6e8fbd;
+  }
+  
+  html ::-webkit-scrollbar-track {
+    background: #ededed;
+  }
